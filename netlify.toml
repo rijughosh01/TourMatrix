@@ -1,0 +1,5 @@
+# Static frontend — deploy repo root (HTML/CSS/JS). API stays on Render.
+[build]
+  publish = "."
+
+# Do not SPA-fallback; this site uses real .html pages (booking.html, etc.).
