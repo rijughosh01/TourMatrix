@@ -363,6 +363,14 @@
     return fetchJson("GET", "/admin/upload-config", null, true);
   }
 
+  function aiStatus() {
+    return fetchJson("GET", "/ai/status", null, false);
+  }
+
+  function aiChat(message, history) {
+    return fetchJson("POST", "/ai/chat", { message: message, history: history || [] }, false);
+  }
+
   function adminUploadImage(file) {
     var token = getToken();
     if (!token) {
@@ -430,5 +438,7 @@
     adminAppointmentRequests: adminAppointmentRequests,
     adminUploadConfig: adminUploadConfig,
     adminUploadImage: adminUploadImage,
+    aiStatus: aiStatus,
+    aiChat: aiChat,
   };
 })(typeof window !== "undefined" ? window : globalThis);
