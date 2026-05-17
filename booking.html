@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse and book curated TourMatrix destinations: secure your dates, see prices, and complete payment in a few steps.">
+  <title>Book a Trip | TourMatrix Travel Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="TourMatrix Travel Agency home">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-main" id="primary-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html" class="active">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest">
+          <a href="register.html" class="btn-nav btn-nav--primary">Create account</a>
+        </div>
+        <div class="nav-auth" id="nav-user" hidden>
+          <button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero page-hero--soft">
+      <div class="container">
+        <h1>Choose your next escape</h1>
+        <p>Every stay is vetted by our team — tap save to shortlist, then book to lock in your trip summary before payment.</p>
+      </div>
+    </header>
+
+    <section class="section section--alt" aria-labelledby="book-catalog-heading">
+      <div class="container">
+        <h2 class="section__title" id="book-catalog-heading">Curated stays &amp; packages</h2>
+        <p class="section__subtitle">Prices shown are from per couple in AUD for the listed nights, including our planning fee. Final invoice confirms flights and add-ons.</p>
+
+        <div id="trip-discovery" class="trip-discovery" aria-label="Filter trips">
+          <label class="visually-hidden" for="trip-search">Search trips</label>
+          <input type="search" id="trip-search" class="trip-search" placeholder="Search name or keyword…" autocomplete="off">
+          <div class="trip-discovery__filters">
+            <label class="trip-filter-label"><span class="visually-hidden">Region</span>
+              <select id="filter-region" class="trip-select">
+                <option value="">All regions</option>
+                <option value="europe">Europe</option>
+                <option value="asia">Asia</option>
+                <option value="americas">Americas</option>
+                <option value="middle-east">Middle East</option>
+                <option value="indian-ocean">Indian Ocean</option>
+                <option value="indian-North">Indian North</option>
+                <option value="nepal">Nepal</option>
+                <option value="srilanka">Sri Lanka</option>
+                <option value="northeastern-india">Indian-NorthEstern</option>
+                <option value="bhutan">Bhutan</option>
+                <option value="mayanmar">Mayanmar</option>
+                <option value="australia">Australia</option>
+                <option value="vietnam">Vietnam</option>
+                <option value="usa">USA</option>
+                <option value="new zealand">New Zeeland</option>
+              </select>
+            </label>
+            <label class="trip-filter-label"><span class="visually-hidden">Budget band</span>
+              <select id="filter-budget" class="trip-select">
+                <option value="">Any budget</option>
+                <option value="low">Under ~$2,500</option>
+                <option value="mid">$2,500–$3,500</option>
+                <option value="high">Over ~$3,500</option>
+              </select>
+            </label>
+            <label class="trip-filter-label"><span class="visually-hidden">Style</span>
+              <select id="filter-style" class="trip-select">
+                <option value="">Any style</option>
+                <option value="beach">Beach</option>
+                <option value="city">City</option>
+                <option value="adventure">Adventure</option>
+                <option value="culture">Culture</option>
+                <option value="romantic">Romantic</option>
+                <option value="wellness">Wellness</option>
+              </select>
+            </label>
+            <label class="trip-filter-label"><span class="visually-hidden">Max nights</span>
+              <select id="filter-nights" class="trip-select">
+                <option value="">Any length</option>
+                <option value="5">Up to 5 nights</option>
+                <option value="7">Up to 7 nights</option>
+                <option value="10">Up to 10 nights</option>
+              </select>
+            </label>
+            <label class="trip-filter-label"><span class="visually-hidden">Sort</span>
+              <select id="sort-trips" class="trip-select">
+                <option value="popularity-desc">Popularity</option>
+                <option value="rating-desc">Highest rated</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+              </select>
+            </label>
+            <button type="button" class="btn btn--outline btn--small" id="trip-filter-reset">Reset</button>
+          </div>
+          <p class="trip-results-meta"><span id="trip-results-count">0</span> trips match · <a href="policies.html">Pricing &amp; deposit policy</a></p>
+        </div>
+        <div id="live-trip-announcement" class="visually-hidden" role="status" aria-live="polite"></div>
+
+        <div id="trip-catalog-grid" class="grid-dest-cards trip-catalog-grid">
+          <article class="dest-card" data-aos="fade-up" data-dest-id="santorini">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1665127556916-3291e7de3ad6?q=80&w=1332" alt="Santorini white buildings and sunset over the caldera" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Santorini package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Santorini Sunset Loft</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,890</span></span>
+              </div>
+              <p class="dest-card__desc">Cliffside loft with iconic white walls, blue domes, and sunset views over the caldera.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Romantic stay</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="60" data-dest-id="maldives">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=600&auto=format&fit=crop&q=60" alt="Overwater villas in a turquoise lagoon" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Maldives package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Maldives Overwater Escape</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$4,200</span></span>
+              </div>
+              <p class="dest-card__desc">Private deck, reef snorkelling, and half-board at a boutique eco-resort.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.95</span>
+                <span class="dest-card__tag">Island resort</span>
+                <span class="dest-card__tag">7 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="kyoto">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?q=80&w=1171" alt="Traditional street in Kyoto with lanterns" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Kyoto package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Kyoto Heritage &amp; Onsen</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,150</span></span>
+              </div>
+              <p class="dest-card__desc">Ryokan stay, tea ceremony, and day trip to Nara with a private guide.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Culture</span>
+                <span class="dest-card__tag">6 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+          <article class="dest-card" data-aos="fade-up" data-dest-id="swiss">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1700251027137-7b3de1510c96?q=80&w=1170" alt="Swiss Alps mountain peaks and alpine meadow" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Swiss Alps package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Swiss Alps Rail Journey</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,680</span></span>
+              </div>
+              <p class="dest-card__desc">Glacier Express sector, lakeside chalet, and hiking with mountain rail passes.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.85</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">8 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="60" data-dest-id="bali">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1704253411612-e4deb715dcd8?q=80&w=1170" alt="Balinese temple gate at dusk" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Bali package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Bali Villa &amp; Wellness</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,240</span></span>
+              </div>
+              <p class="dest-card__desc">Private pool villa, rice-terrace walks, and curated spa days in Ubud.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.75</span>
+                <span class="dest-card__tag">Wellness</span>
+                <span class="dest-card__tag">6 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="paris">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1566902145833-0475c9f1a1bf?q=80&w=1171" alt="Eiffel Tower at golden hour" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Paris package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Paris Long Weekend</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,450</span></span>
+              </div>
+              <p class="dest-card__desc">Boutique Left Bank hotel, Louvre timed entry, and Seine dinner cruise.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.82</span>
+                <span class="dest-card__tag">City break</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <!-- new command -->
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="spity">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1617159156637-dfb8655c9f95?q=80&w=1074" alt="Spiti Valley, The Land of Adventure" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Spiti Valley package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Spiti Valley Land of Adventure</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,200</span></span>
+              </div>
+              <p class="dest-card__desc">world’s highest post office, highest motorable village, Chandratal Lake ,snow leopard ,quaint homestays.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">7 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+           <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="ladakh">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1636790132954-b0a7467c308b?q=80&w=1332" alt="Ladakh: Where the Earth Touches the Sky" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Ladakh package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Ladakh Long Weekend</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$450</span></span>
+              </div>
+              <p class="dest-card__desc">Adventure bike riding, Pangong Tso Lake, Spirituality, Surreal Landscapes.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.82</span>
+                <span class="dest-card__tag">Romantic </span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="maya">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?q=80&w=774" alt="Maya Bay Beach" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Maya Bay package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Maya Bay Beach</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,450</span></span>
+              </div>
+              <p class="dest-card__desc">World-famous, Stunning Cove Known for its White Sand, Boat Riding.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.7</span>
+                <span class="dest-card__tag">Beach</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="risi">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1652594374334-1fcf5150e415?q=80&w=1074" alt="Rishikesh" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Rishikesh package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Rishikesh</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,000</span></span>
+              </div>
+              <p class="dest-card__desc">Premier Destination for Bungee Jumping and Rafting.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.5</span>
+                <span class="dest-card__tag">City break</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="pokhara">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1562462181-b228e3cff9ad?q=80&w=1310" alt="Pokhara Valley" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Pokhara package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Pokhara Valley Nepal</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,850</span></span>
+              </div>
+              <p class="dest-card__desc">Famous for paragliding , Zip-lining in Sarangkot.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.82</span>
+                <span class="dest-card__tag">City break</span>
+                <span class="dest-card__tag">8 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+            <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="ella">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1656314938734-28a498f12081?q=80&w=1109" alt="Ella" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save ella package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Ella Dramatic Mountain Scenery</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,550</span></span>
+              </div>
+              <p class="dest-card__desc">A perfect blend of mountain trekking, Waterfall exploration, Scenic adventure.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.7</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="shillong">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1625826415766-001bd75aaf52?q=80&w=735" alt="Scotland of the East" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Shillong package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Shillong Scotland of the East</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,250</span></span>
+              </div>
+              <p class="dest-card__desc">Stunning natural landscapes, Including Umiam Lake, Elephant Falls.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.7</span>
+                <span class="dest-card__tag">Culture</span>
+                <span class="dest-card__tag">3 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+
+           <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="manali">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1170" alt="Manali Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Manali package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Snowy Manali Vives</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,500</span></span>
+              </div>
+              <p class="dest-card__desc">Snow-caped Solang Vally, Ancient Hadimba Devi Temple, vibrant Mall Road.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Wellness</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="sikim">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1632407575668-c956f851c3d7?q=80&w=1096" alt="Sikim Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Sikim package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">North Sikim SWitzerland of India</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,350</span></span>
+              </div>
+              <p class="dest-card__desc">Breathtaking Himalayan scenery, featuring high-altitude lakes, snow-capped peaks.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Romantic</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+           <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="himachal">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1581791534721-e599df4417f7?q=80&w=1331" alt="Himachal pradesh  Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Himachal Pradesh package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Land Of the Himalayas</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,450</span></span>
+              </div>
+              <p class="dest-card__desc">UNESCO World Heritage Site Kalka-Shimla Railway, white water rafting, paragliding.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">City</span>
+                <span class="dest-card__tag">8 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="kashmir">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1643449416258-5c8e7ec598b1?q=80&w=1170" alt="Kashmir Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Kashmir package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Kashmir Paradise on Earth</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,150</span></span>
+              </div>
+              <p class="dest-card__desc">Famous for Dal Lake houseboats rides, the Mughal Gardens, and the Indira Gandhi Tulip Garden.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="shimla">
+            <div class="dest-card__media">
+              <img src="https://plus.unsplash.com/premium_photo-1697729733902-f8c92710db07?q=80&w=1170" alt="Shimla Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Shimla package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Shimla Queen of Hills</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,550</span></span>
+              </div>
+              <p class="dest-card__desc">Strolling the pedestrian-only Mall Road, visiting the iconic Ridge and Christ Church.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Romantic</span>
+                <span class="dest-card__tag">6 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+           <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="dharamshala">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1748502128646-d26527a14595?q=80&w=2071" alt="Little Lhasa of India" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Dharamshala package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Dharamshala Little Lhasa of India</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,150</span></span>
+              </div>
+              <p class="dest-card__desc">The Dalai Lama's temple in Mcleodganj, the serene Bhagsunag Waterfal, HPCA Cricket Stadium.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.7</span>
+                <span class="dest-card__tag">Culture</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="paro">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1585940043926-92f50991d354?q=80&w=735" alt="The Paro Valley" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Paro Valley package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Gem of the Paro Valley</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,650</span></span>
+              </div>
+              <p class="dest-card__desc">The monastery complex hangs on a vertical cliff, designed to blend into the rock face.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Culture</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="mayan">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1571633386230-cfb41acc5a03?q=80&w=687" alt="The MayanmarBagan Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save MayanmarBagan package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">MayanmarBagan City of four million pagodas</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,850</span></span>
+              </div>
+              <p class="dest-card__desc">An ancient city and UNESCO World Heritage Site in Myanmar’s Mandalay Region.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.7</span>
+                <span class="dest-card__tag">City</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="nagapali">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1506400680058-54e63a463572?q=80&w=1074" alt="The Nagapali Vives" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Nagapali package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Nagapali Beach</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$2,750</span></span>
+              </div>
+              <p class="dest-card__desc">A tranquil, pristine beach on the Bay of Bengal, ideal for relaxing.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Beach</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="bombo">
+            <div class="dest-card__media">
+              <img src="https://assets.atdw-online.com.au/images/a346327b4551c9f454f95726c781c820.jpeg" alt="Quarry Geological Site" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Bombo Headland package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Bombo Headland Quarry Geological Site</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,200</span></span>
+              </div>
+              <p class="dest-card__desc">A dramatic geological site, moon-like landscape, featuring massive, weathered basalt columns.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">6 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="kangaroo">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1680755388280-61b72e98a309?q=80&w=1170" alt="Wildlife Haven" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Kangaroo Island package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Kangaroo Island Wildlife Haven</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,600</span></span>
+              </div>
+              <p class="dest-card__desc">As Australia's third-largest island, it features rugged coastlines, pristine beaches, diverse wildlife.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.77</span>
+                <span class="dest-card__tag">Wellness</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="sapa">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1665905905591-fb66b0496481?q=80&w=1074" alt="City in the Cloud" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Sapa package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Sapa City in the Cloud</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,750</span></span>
+              </div>
+              <p class="dest-card__desc">A scenic, mountainous town in Northwest Vietnam renowned for its dramatic rice terraces, cool climate, and rich ethnic minority culture.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.87</span>
+                <span class="dest-card__tag">City</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="georgia">
+            <div class="dest-card__media">
+              <img src="https://georgiastartshere.ge/wp-content/uploads/2025/06/shutterstock_2607127567-2.jpg" alt="City of Love" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Georgia package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Georgia City of Love</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,950</span></span>
+              </div>
+              <p class="dest-card__desc">Best for hiking, adventure, and beach activities in Batumi, although it is the busiest time.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.67</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">8 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="beaber">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1510116760705-d5155499ea67?q=80&w=1074" alt="A Nature of Lover's Escape" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Beaver Valley package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Beaver Vally A Nature of Lover's Escape</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,680</span></span>
+              </div>
+              <p class="dest-card__desc">Hiking at Old Baldy, viewing waterfalls like Eugenia Falls and Hoggs Falls.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.87</span>
+                <span class="dest-card__tag">Romantic</span>
+                <span class="dest-card__tag">7 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="kalimpong">
+            <div class="dest-card__media">
+              <img src="https://plus.unsplash.com/premium_photo-1697729733902-f8c92710db07?q=80&w=870" alt="The Nest of Smiles" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Kalimpong package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Kalimpong The Nest of Smiles</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,350</span></span>
+              </div>
+              <p class="dest-card__desc">Popular for hiking, trekking, panoramic Kanchenjunga views.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">4 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="cock">
+            <div class="dest-card__media">
+              <img src="https://images.unsplash.com/photo-1739582766930-1da8be78f10b?w=500&auto=format&fit=crop&q=60" alt="Cock Mountain Trail" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Cock Mountain package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Hen and Cock Mountain Trails</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$3,580</span></span>
+              </div>
+              <p class="dest-card__desc">It is a major destination for climbers and tourists, with the nearby Mount Cook Village serving as a base.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.9</span>
+                <span class="dest-card__tag">Romantic</span>
+                <span class="dest-card__tag">7 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+          <article class="dest-card" data-aos="fade-up" data-aos-delay="120" data-dest-id="megha">
+            <div class="dest-card__media">
+              <img src="https://tse3.mm.bing.net/th/id/OIP.P5YEBUgqRmfqkYwX3GaVsgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Seven Sister Waterfal" width="800" height="480" loading="lazy">
+              <button type="button" class="dest-card__bookmark" aria-label="Save Cock Mountain package">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <h3 class="dest-card__title">Seven Sister Waterfal</h3>
+                <span class="dest-card__price"><span class="dest-card__price-inner">$1,650</span></span>
+              </div>
+              <p class="dest-card__desc">The waterfalls are seasonal, roaring at peak capacity during the monsoon.</p>
+              <div class="dest-card__tags">
+                <span class="dest-card__tag"><span class="dest-card__star" aria-hidden="true">★</span> 4.8</span>
+                <span class="dest-card__tag">Adventure</span>
+                <span class="dest-card__tag">5 nights</span>
+              </div>
+              <button type="button" class="dest-card__cta js-book-dest">Book now</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div id="compare-tray" class="compare-tray" hidden>
+      <div class="compare-tray__inner container">
+        <p><strong>Compare:</strong> <span id="compare-tray-names"></span></p>
+        <button type="button" class="btn btn--primary btn--small" id="compare-open">Open compare</button>
+      </div>
+    </div>
+
+    <div id="compare-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="compare-modal-title">
+      <div class="modal modal--wide">
+        <h3 id="compare-modal-title" class="visually-hidden">Compare trips</h3>
+        <button type="button" class="trip-detail-close" id="compare-modal-close" aria-label="Close compare">&times;</button>
+        <div id="compare-modal-inner"></div>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="book-help-heading">
+      <div class="container">
+        <div class="cta-band cta-band--soft" data-aos="zoom-in">
+          <h2 id="book-help-heading">Need a custom route?</h2>
+          <p>Combine any of these with extra stops — your consultant finalises flights and insurance before we charge the deposit.</p>
+          <a href="appointment.html" class="btn btn--primary">Talk to a consultant</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Tour<span>Matrix</span></a>
+        <p>Book curated travel with a human team behind every itinerary.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="policies.html">Policies</a></li>
+          <li><a href="login.html">Member login</a></li>
+          <li><a href="about.html">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="contact.html">Office &amp; map</a></li>
+          <li><a href="tel:+91 7076683501">+91 7 0766 83501</a></li>
+          <li><a href="mailto:info@tourmatrix.com">info@tourmatrix.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency. All rights reserved.</p>
+  </footer>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title"></h3>
+      <p id="modal-message"></p>
+      <button type="button" class="btn btn--primary btn-block" id="modal-close">OK</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policies &amp; trust | TourMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+      <nav class="nav-main" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="policies.html" class="active">Policies</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero page-hero--soft">
+      <div class="container">
+        <h1>Policies &amp; transparency</h1>
+        <p>How deposits, cancellations, and documents work before we wire real payments (e.g. Stripe) on go-live.</p>
+      </div>
+    </header>
+
+    <section class="section section--alt">
+      <div class="container policies-content">
+        <article class="policy-block" id="deposits">
+          <h2>Deposits &amp; balance</h2>
+          <p>A deposit confirms our planning slot and supplier holds. The balance is invoiced before ticket issue or final hotel deadline — typically 60–45 days before departure for long-haul trips.</p>
+          <ul>
+            <li>Deposit percentage shown at checkout applies to <strong>package + selected add-ons</strong> in this demo.</li>
+            <li>Final invoice includes live airfares, taxes, and exchange variation.</li>
+          </ul>
+        </article>
+
+        <article class="policy-block" id="cancellation">
+          <h2>Cancellations &amp; changes</h2>
+          <p>Cancellation fees follow supplier contracts (airlines, hotels, tours). We pass through only what suppliers charge us, plus an agency amendment fee where applicable. Ask your consultant for the matrix for your specific booking.</p>
+        </article>
+
+        <article class="policy-block" id="atas">
+          <h2>Accreditation</h2>
+          <p>TourMatrix operates as an Australian travel intermediary. Replace this paragraph with your <strong>ATAS</strong> or state licence details and membership number when applicable.</p>
+        </article>
+
+        <article class="policy-block" id="stripe">
+          <h2>Payments (Stripe)</h2>
+          <p>For production, card data should never touch your server unencrypted. Use <strong>Stripe Checkout</strong> or the <strong>Payment Element</strong> with a backend endpoint that creates a PaymentIntent. A stub PHP example for XAMPP lives in <code>api/stripe-create-intent.php.example</code> — copy to <code>api/stripe-create-intent.php</code>, add Composer’s Stripe SDK, and set keys via environment variables.</p>
+        </article>
+
+        <article class="policy-block" id="documents">
+          <h2 id="itinerary">Itinerary documents</h2>
+          <p>After final payment we issue a PDF itinerary and e-tickets where applicable. Place a branded PDF at <code>assets/itinerary-placeholder.pdf</code> if you want a downloadable sample from the confirmation page.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="index.html" class="footer-logo">Tour<span>Matrix</span></a></div>
+      <div><h3>Explore</h3><ul><li><a href="booking.html">Book</a></li><li><a href="my-trips.html">My trips</a></li></ul></div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency.</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

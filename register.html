@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create a free TourMatrix Travel Agency account for faster consultations and tailored recommendations.">
+  <title>Create Account | WanderLux Travel Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="TourMatrix Travel Agency home">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-main" id="primary-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest">
+          <a href="register.html" class="btn-nav btn-nav--primary">Create account</a>
+        </div>
+        <div class="nav-auth" id="nav-user" hidden>
+          <button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="auth-layout">
+    <div class="auth-card" data-aos="zoom-in">
+      <h1>Create account</h1>
+      <p class="lead">Join TourMatrix for a smoother planning experience. Already registered? <a href="login.html">Log in</a>.</p>
+      <form id="register-form" novalidate>
+        <div class="form-group" data-field="regFullName">
+          <label for="regFullName">Full name</label>
+          <input type="text" id="regFullName" name="regFullName" autocomplete="name" required aria-required="true">
+          <span class="field-error" role="alert">Enter your full name.</span>
+        </div>
+        <div class="form-group" data-field="regEmail">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="regEmail" autocomplete="email" required aria-required="true">
+          <span class="field-error" role="alert">Valid email required.</span>
+        </div>
+        <div class="form-group" data-field="regPassword">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" name="regPassword" autocomplete="new-password" required aria-required="true" minlength="8">
+          <span class="field-error" role="alert">Minimum 8 characters.</span>
+          <p class="form-hint">Use at least 8 characters. For assessments only — do not reuse real passwords.</p>
+        </div>
+        <div class="form-group" data-field="regPasswordConfirm">
+          <label for="regPasswordConfirm">Confirm password</label>
+          <input type="password" id="regPasswordConfirm" name="regPasswordConfirm" autocomplete="new-password" required aria-required="true">
+          <span class="field-error" role="alert">Passwords must match.</span>
+        </div>
+        <button type="submit" class="btn btn--primary btn-block">Create account</button>
+      </form>
+      <p class="auth-switch">Accounts are saved in this browser only (localStorage).</p>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Tour<span>Matrix</span></a>
+        <p>Book curated travel with a human team behind every itinerary.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="policies.html">Policies</a></li>
+          <li><a href="login.html">Member login</a></li>
+          <li><a href="about.html">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="contact.html">Office &amp; map</a></li>
+          <li><a href="tel:+91 7076683501">+91 7 0766 83501</a></li>
+          <li><a href="mailto:info@tourmatrix.com">info@tourmatrix.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency. All rights reserved.</p>
+  </footer>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title">Title</h3>
+      <p id="modal-message">Message</p>
+      <button type="button" class="btn btn--secondary" id="modal-close">Close</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

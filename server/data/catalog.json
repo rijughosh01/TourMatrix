@@ -1,0 +1,1128 @@
+{
+  "santorini": {
+    "title": "Santorini Sunset Loft",
+    "price": 2890,
+    "depositPercent": 0.2,
+    "desc": "Cliffside loft with iconic white walls, blue domes, and sunset views over the caldera.",
+    "image": "https://images.unsplash.com/photo-1613395877344-13d4c79e4df1?w=800&q=75&fm=webp",
+    "imageAlt": "Santorini white buildings and sunset over the caldera",
+    "region": "europe",
+    "styles": [
+      "romantic",
+      "beach"
+    ],
+    "nights": 5,
+    "rating": 4.9,
+    "popularity": 96,
+    "budgetTier": "mid",
+    "timezone": "GMT+3",
+    "bestSeason": "Apr–Oct",
+    "lat": 36.3932,
+    "lng": 25.4615,
+    "included": [
+      "Private airport–port transfers on Santorini",
+      "Boutique caldera-view accommodation",
+      "Sunset sailing slot coordination",
+      "Daily breakfast & WanderLux concierge line"
+    ],
+    "notIncluded": [
+      "International flights",
+      "Travel insurance (add during checkout)",
+      "Meals unless stated"
+    ],
+    "faq": [
+      {
+        "q": "Is this honeymoon-friendly?",
+        "a": "Yes — we note celebrations for wine and room preferences."
+      },
+      {
+        "q": "Can we extend to Athens?",
+        "a": "Absolutely; your consultant stitches ferry or flight add-ons."
+      }
+    ]
+  },
+  "maldives": {
+    "title": "Maldives Overwater Escape",
+    "price": 4200,
+    "depositPercent": 0.2,
+    "desc": "Private deck, reef snorkelling, and half-board at a boutique eco-resort.",
+    "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=75&fm=webp",
+    "imageAlt": "Overwater villas in a turquoise lagoon",
+    "region": "indian-ocean",
+    "styles": [
+      "beach",
+      "romantic"
+    ],
+    "nights": 7,
+    "rating": 4.95,
+    "popularity": 98,
+    "budgetTier": "high",
+    "timezone": "GMT+5",
+    "bestSeason": "Nov–Apr",
+    "lat": 3.2028,
+    "lng": 73.2207,
+    "included": [
+      "Seaplane or speedboat transfers",
+      "Overwater villa with half-board",
+      "House reef snorkelling gear",
+      "WanderLux backup routing if weather delays transfers"
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "kyoto": {
+    "title": "Kyoto Heritage & Onsen",
+    "price": 3150,
+    "depositPercent": 0.2,
+    "desc": "Ryokan stay, tea ceremony, and day trip to Nara with a private guide.",
+    "image": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=75&fm=webp",
+    "imageAlt": "Traditional street in Kyoto with lanterns",
+    "region": "asia",
+    "styles": [
+      "culture",
+      "city"
+    ],
+    "nights": 6,
+    "rating": 4.8,
+    "popularity": 91,
+    "budgetTier": "mid",
+    "timezone": "GMT+9",
+    "bestSeason": "Mar–May · Oct–Nov",
+    "lat": 35.0116,
+    "lng": 135.7681,
+    "included": [
+      "Ryokan nights with kaiseki option",
+      "Tea ceremony booking",
+      "Nara day with guide",
+      "JR pass guidance"
+    ],
+    "notIncluded": [
+      "Shinkansen from Tokyo if not packaged"
+    ],
+    "faq": [
+      {
+        "q": "Luggage forwarding?",
+        "a": "We coordinate takkyubin between cities when you add Tokyo."
+      }
+    ]
+  },
+  "swiss": {
+    "title": "Swiss Alps Rail Journey",
+    "price": 3680,
+    "depositPercent": 0.2,
+    "desc": "Glacier Express sector, lakeside chalet, and hiking with mountain rail passes.",
+    "image": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=75&fm=webp",
+    "imageAlt": "Swiss Alps mountain peaks and alpine meadow",
+    "region": "europe",
+    "styles": [
+      "adventure",
+      "romantic"
+    ],
+    "nights": 8,
+    "rating": 4.85,
+    "popularity": 89,
+    "budgetTier": "high",
+    "timezone": "GMT+1",
+    "bestSeason": "Jun–Sep · Dec–Mar",
+    "lat": 46.5197,
+    "lng": 7.4706,
+    "included": [
+      "Swiss Travel Pass tier matched to itinerary",
+      "Scenic rail reservations",
+      "Alpine hiking suggestions"
+    ],
+    "notIncluded": [
+      "Mountain lunches",
+      "Equipment hire"
+    ],
+    "faq": [
+      {
+        "q": "Altitude concerns?",
+        "a": "We pace ascents and suggest rest days."
+      }
+    ]
+  },
+  "bali": {
+    "title": "Bali Villa & Wellness",
+    "price": 2240,
+    "depositPercent": 0.2,
+    "desc": "Private pool villa, rice-terrace walks, and curated spa days in Ubud.",
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=75&fm=webp",
+    "imageAlt": "Balinese temple gate at dusk",
+    "region": "asia",
+    "styles": [
+      "wellness",
+      "beach"
+    ],
+    "nights": 6,
+    "rating": 4.75,
+    "popularity": 93,
+    "budgetTier": "low",
+    "timezone": "GMT+8",
+    "bestSeason": "Apr–Oct",
+    "lat": -8.5069,
+    "lng": 115.2625,
+    "included": [
+      "Private pool villa category",
+      "Ubud transfers block",
+      "Spa credits where contracted"
+    ],
+    "notIncluded": [
+      "Domestic hops to other islands unless added"
+    ],
+    "faq": [
+      {
+        "q": "Nyepi closure?",
+        "a": "We block dates around Silent Day when airport closes."
+      }
+    ]
+  },
+  "paris": {
+    "title": "Paris Long Weekend",
+    "price": 2450,
+    "depositPercent": 0.2,
+    "desc": "Boutique Left Bank hotel, Louvre timed entry, and Seine dinner cruise.",
+    "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=75&fm=webp",
+    "imageAlt": "Eiffel Tower at golden hour",
+    "region": "europe",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 4,
+    "rating": 4.82,
+    "popularity": 94,
+    "budgetTier": "mid",
+    "timezone": "GMT+1",
+    "bestSeason": "Apr–Jun · Sep–Oct",
+    "lat": 48.8566,
+    "lng": 2.3522,
+    "included": [
+      "Boutique hotel with breakfast",
+      "Timed Louvre entry",
+      "Seine cruise voucher"
+    ],
+    "notIncluded": [
+      "Eurostar unless quoted"
+    ],
+    "faq": [
+      {
+        "q": "Strike contingency?",
+        "a": "We monitor SNCF/RATP alerts and rebook legs."
+      }
+    ]
+  },
+  "tokyo": {
+    "title": "Tokyo & Neon Nights",
+    "price": 2650,
+    "depositPercent": 0.2,
+    "desc": "Design hotel in Shibuya, teamLab tickets, and day trip to Hakone onsen.",
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=75&fm=webp",
+    "imageAlt": "Neon-lit street crossing in Tokyo at night",
+    "region": "asia",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 5,
+    "rating": 4.8,
+    "popularity": 95,
+    "budgetTier": "mid",
+    "timezone": "GMT+9",
+    "bestSeason": "Mar–May · Oct–Nov",
+    "lat": 35.6762,
+    "lng": 139.6503,
+    "included": [
+      "Design hotel base",
+      "teamLab slot coordination",
+      "Hakone day outline"
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "nyc": {
+    "title": "New York City Break",
+    "price": 3200,
+    "depositPercent": 0.2,
+    "desc": "Midtown boutique stay, Broadway seats, and skyline sunset from a rooftop bar.",
+    "image": "https://images.unsplash.com/photo-1522083165195-3424ed129620?w=800&q=75&fm=webp",
+    "imageAlt": "New York City skyline with skyscrapers",
+    "region": "americas",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 5,
+    "rating": 4.78,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "GMT-5",
+    "bestSeason": "Apr–Jun · Sep–Nov",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "included": [
+      "Boutique midtown stay",
+      "Broadway category held",
+      "Top-of-Rock or Edge timing tips"
+    ],
+    "notIncluded": [
+      "US ESTA/visa costs"
+    ],
+    "faq": [
+      {
+        "q": "First visit?",
+        "a": "We add neighbourhood orientation notes in your PDF."
+      }
+    ]
+  },
+  "dubai": {
+    "title": "Dubai Desert & Towers",
+    "price": 2850,
+    "depositPercent": 0.2,
+    "desc": "Marina hotel, desert safari with dinner, and Burj Khalifa timed entry.",
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=75&fm=webp",
+    "imageAlt": "Dubai skyline at sunset",
+    "region": "middle-east",
+    "styles": [
+      "city",
+      "adventure"
+    ],
+    "nights": 5,
+    "rating": 4.77,
+    "popularity": 88,
+    "budgetTier": "mid",
+    "timezone": "GMT+4",
+    "bestSeason": "Nov–Mar",
+    "lat": 25.2048,
+    "lng": 55.2708,
+    "included": [
+      "Marina-facing room category",
+      "Desert safari with dinner",
+      "Burj Khalifa slot"
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  },
+  "spity": {
+    "title": "Spiti Vally Land of Adventure",
+    "price": 3100,
+    "depositPercent": 0.2,
+    "desc": "world’s highest post office, highest motorable village, Chandratal Lake ,snow leopard ,quaint homestays.",
+    "image": "https://images.unsplash.com/photo-1617159156637-dfb8655c9f95?q=80&w=1074",
+    "imageAlt": "Spiti Valley, The Land of Adventure",
+    "region": "indian-North",
+    "styles": [
+      "adventure"
+    ],
+    "nights": 7,
+    "rating": 4.8,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "GMT+5:30",
+    "bestSeason": "May-Sep",
+    "lat": 32.2461,
+    "lng": 78.0349,
+    "included": [
+      "Pin Valley National Park",
+      "Quaint Homestays"
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "First visit?",
+        "a": "We add neighbourhood orientation notes in your PDF."
+      }
+    ]
+  },
+  "ladakh": {
+    "title": "Ladakh Long Weekend",
+    "price": 450,
+    "depositPercent": 0.2,
+    "desc": "Adventure bike riding, Pangong Tso Lake, Spirituality, Surreal Landscapes.",
+    "image": "https://images.unsplash.com/photo-1636790132954-b0a7467c308b?q=80&w=1332",
+    "imageAlt": "Ladakh: Where the Earth Touches the Sky",
+    "region": "indian-North",
+    "styles": [
+      "wellness",
+      "romantic"
+    ],
+    "nights": 5,
+    "rating": 4.82,
+    "popularity": 93,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Apr–Oct",
+    "lat": 34.2268,
+    "lng": 77.5619,
+    "included": [
+      "Design hotel base",
+      "Khardung La Pass",
+      "MagneticHill"
+    ],
+    "notIncluded": [
+      "Domestic hops to other islands unless added"
+    ],
+    "faq": [
+      {
+        "q": "Nyepi closure?",
+        "a": "We block dates around Silent Day when airport closes."
+      }
+    ]
+  },
+  "maya": {
+    "title": "Maya Bay Beach",
+    "price": 2450,
+    "depositPercent": 0.2,
+    "desc": "World-famous, Stunning Cove Known for its White Sand, Boat Riding.",
+    "image": "https://images.unsplash.com/photo-1534008897995-27a23e859048?q=80&w=774",
+    "imageAlt": "Maya Bay Beach",
+    "region": "asia",
+    "styles": [
+      "adventure",
+      "beach"
+    ],
+    "nights": 5,
+    "rating": 4.7,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "GMT+9",
+    "bestSeason": "Nov–Apr",
+    "lat": 7.6789,
+    "lng": 98.765,
+    "included": [
+      "Design hotel base",
+      "teamLab slot coordination",
+      "High Limestone Cliffside"
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "risi": {
+    "title": "Rishikesh",
+    "price": 1000,
+    "depositPercent": 0.2,
+    "desc": "Premier Destination for Bungee Jumping and Rafting.",
+    "image": "https://images.unsplash.com/photo-1652594374334-1fcf5150e415?q=80&w=1074",
+    "imageAlt": "Rishikesh",
+    "region": "indian-North",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 5,
+    "rating": 4.5,
+    "popularity": 88,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Jan-Dec",
+    "lat": 30.1034,
+    "lng": 78.2948,
+    "included": [
+      "Spiritual heritage, adventure activities, and scenic Himalayan landscapes."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "First visit?",
+        "a": "We add neighbourhood orientation notes in your PDF."
+      }
+    ]
+  },
+  "pokhara": {
+    "title": "Pokhara Valley Nepal",
+    "price": 3850,
+    "depositPercent": 0.2,
+    "desc": "Famous for paragliding , Zip-lining in Sarangkot.",
+    "image": "https://images.unsplash.com/photo-1562462181-b228e3cff9ad?q=80&w=1310",
+    "imageAlt": "Pokhara Valley",
+    "region": "nepal",
+    "styles": [
+      "city",
+      "wellness"
+    ],
+    "nights": 8,
+    "rating": 4.82,
+    "popularity": 90,
+    "budgetTier": "high",
+    "timezone": "GMT+5:45",
+    "bestSeason": "Sep–Nov · Mar–May",
+    "lat": 28.2669,
+    "lng": 83.9685,
+    "included": [
+      "Phewa Lake, A spiritual sunrise at Sarangkot."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "ella": {
+    "title": "Ella Dramatic Mountain Scenery",
+    "price": 3550,
+    "depositPercent": 0.2,
+    "desc": "A perfect blend of mountain trekking, Waterfall exploration, Scenic adventure.",
+    "image": "https://images.unsplash.com/photo-1656314938734-28a498f12081?q=80&w=1109",
+    "imageAlt": "Ella",
+    "region": "srilanka",
+    "styles": [
+      "culture",
+      "adventure"
+    ],
+    "nights": 5,
+    "rating": 4.7,
+    "popularity": 90,
+    "budgetTier": "high",
+    "timezone": "UTC+5:30",
+    "bestSeason": "Jun–May",
+    "lat": 6.8756,
+    "lng": 81.0463,
+    "included": [
+      "Little Adam's Peak, Ella Rock, Nine Arch bridge."
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "shillong": {
+    "title": "Shillong Scotland of the East",
+    "price": 1250,
+    "depositPercent": 0.2,
+    "desc": "Stunning natural landscapes, Including Umiam Lake, Elephant Falls.",
+    "image": "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?q=80&w=735",
+    "imageAlt": "Scotland of the East",
+    "region": "northeastern-india",
+    "styles": [
+      "culture",
+      "city"
+    ],
+    "nights": 3,
+    "rating": 4.7,
+    "popularity": 88,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun",
+    "lat": 25.5788,
+    "lng": 91.8933,
+    "included": [
+      "Ward's Lake, Shillong GolfCourse, and the bustling Police Bazar."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "manali": {
+    "title": "Snowy Manali Vives",
+    "price": 1500,
+    "depositPercent": 0.2,
+    "desc": "Snow-caped Solang Vally, Ancient Hadimba Devi Temple, vibrant Mall Road.",
+    "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1170",
+    "imageAlt": "Manali Vives",
+    "region": "indian-North",
+    "styles": [
+      "romantic",
+      "wellness"
+    ],
+    "nights": 4,
+    "rating": 4.9,
+    "popularity": 90,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun",
+    "lat": 32.2432,
+    "lng": 77.1892,
+    "included": [
+      "Popular for trekking (Hampta Pass, Bhrigu Lake), rafting in the Beas River, and zorbing."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "sikim": {
+    "title": "North Sikim SWitzerland of India",
+    "price": 1350,
+    "depositPercent": 0.2,
+    "desc": " Breathtaking Himalayan scenery, featuring high-altitude lakes, snow-capped peaks.",
+    "image": "https://images.unsplash.com/photo-1632407575668-c956f851c3d7?q=80&w=1096",
+    "imageAlt": "Sikim Vives",
+    "region": "northeastern-india",
+    "styles": [
+      "romantic",
+      "wellness"
+    ],
+    "nights": 5,
+    "rating": 4.8,
+    "popularity": 90,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun",
+    "lat": 27.66667,
+    "lng": 88.5,
+    "included": [
+      "Must-visit spots include Lachung and Lachen villages, Zero Point, and the rhododendron sanctuaries."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "himachal": {
+    "title": "Land Of the Himalayas",
+    "price": 1450,
+    "depositPercent": 0.2,
+    "desc": "UNESCO World Heritage Site Kalka-Shimla Railway, white water rafting, paragliding.",
+    "image": "https://images.unsplash.com/photo-1581791534721-e599df4417f7?q=80&w=1331",
+    "imageAlt": "Himachal pradesh  Vives",
+    "region": "indian-North",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 8,
+    "rating": 4.8,
+    "popularity": 96,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun",
+    "lat": 32.1024,
+    "lng": 77.5619,
+    "included": [
+      "Famous for its breathtaking, snow-capped peaks, deep valleys, lush pine forests, and major river systems."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "kashmir": {
+    "title": "Kashmir Paradise on Earth",
+    "price": 1150,
+    "depositPercent": 0.2,
+    "desc": "Famous for Dal Lake houseboats rides, the Mughal Gardens, and the Indira Gandhi Tulip Garden.",
+    "image": "https://images.unsplash.com/photo-1643449416258-5c8e7ec598b1?q=80&w=1170",
+    "imageAlt": "Kashmir Vives",
+    "region": "indian-North",
+    "styles": [
+      "romantic",
+      "adventure"
+    ],
+    "nights": 5,
+    "rating": 4.8,
+    "popularity": 92,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun . Dec–Mar",
+    "lat": 33.2778,
+    "lng": 75.3412,
+    "included": [
+      "Characterized by snow-capped mountains, alpine meadows, pine forests, and numerous lakes."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "shimla": {
+    "title": "Shimla Queen of Hills",
+    "price": 1550,
+    "depositPercent": 0.2,
+    "desc": "Strolling the pedestrian-only Mall Road, visiting the iconic Ridge and Christ Church.",
+    "image": "https://plus.unsplash.com/premium_photo-1697729733902-f8c92710db07?q=80&w=1170",
+    "imageAlt": "Shimla Vives",
+    "region": "indian-North",
+    "styles": [
+      "romantic",
+      "adventure"
+    ],
+    "nights": 6,
+    "rating": 4.9,
+    "popularity": 90,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun . Dec–Feb",
+    "lat": 31.105,
+    "lng": 77.164,
+    "included": [
+      "Exploring the historic Viceregal Lodge, taking the toy train, and enjoying panoramic views from Jakhoo Hill."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "dharamshala": {
+    "title": "Dharamshala Little Lhasa of India",
+    "price": 2150,
+    "depositPercent": 0.2,
+    "desc": "The Dalai Lama's temple in Mcleodganj, the serene Bhagsunag Waterfal, HPCA Cricket Stadium.",
+    "image": "https://images.unsplash.com/photo-1748502128646-d26527a14595?q=80&w=2071",
+    "imageAlt": "Little Lhasa of India",
+    "region": "indian-North",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 4,
+    "rating": 4.7,
+    "popularity": 90,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar-Jun",
+    "lat": 32.219,
+    "lng": 76.3234,
+    "included": [
+      "Major hill station , located in the Kangra Valley and nestled in the Dhauladhar mountain range."
+    ],
+    "notIncluded": [
+      "JR Pass if you self-purchase"
+    ],
+    "faq": [
+      {
+        "q": "Pocket Wi‑Fi?",
+        "a": "We can add pickup at airport in options."
+      }
+    ]
+  },
+  "paro": {
+    "title": "Gem of the Paro Valley",
+    "price": 2650,
+    "depositPercent": 0.2,
+    "desc": "The monastery complex hangs on a vertical cliff, designed to blend into the rock face.",
+    "image": "https://images.unsplash.com/photo-1585940043926-92f50991d354?q=80&w=735",
+    "imageAlt": "The Paro Valley",
+    "region": "bhutan",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 4,
+    "rating": 4.9,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "UTC+06:00",
+    "bestSeason": "Mar-May . Sep–Nov",
+    "lat": 27.4919,
+    "lng": 89.3633,
+    "included": [
+      "It includes four main temples, several dwellings, and eight caves where monks reside and study."
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "mayan": {
+    "title": "MayanmarBagan City of four million pagodas",
+    "price": 2850,
+    "depositPercent": 0.2,
+    "desc": "An ancient city and UNESCO World Heritage Site in Myanmar’s Mandalay Region.",
+    "image": "https://images.unsplash.com/photo-1571633386230-cfb41acc5a03?q=80&w=687",
+    "imageAlt": "The MayanmarBagan Vives",
+    "region": "mayanmar",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 5,
+    "rating": 4.7,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "GMT+6:30",
+    "bestSeason": "Mar-May . Sep–Nov",
+    "lat": 21.1725,
+    "lng": 94.86,
+    "included": [
+      "Incredible sunrise views and hot air balloon rides over the historic landscape."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  },
+  "nagapali": {
+    "title": "Nagapali Beach",
+    "price": 2750,
+    "depositPercent": 0.2,
+    "desc": "A tranquil, pristine beach on the Bay of Bengal, ideal for relaxing.",
+    "image": "https://images.unsplash.com/photo-1506400680058-54e63a463572?q=80&w=1074",
+    "imageAlt": "The Nagapali Vives",
+    "region": "mayanmar",
+    "styles": [
+      "beach"
+    ],
+    "nights": 5,
+    "rating": 4.8,
+    "popularity": 90,
+    "budgetTier": "mid",
+    "timezone": "GMT+6:30",
+    "bestSeason": "Nov–Apr",
+    "lat": 18.4333,
+    "lng": 94.3167,
+    "included": [
+      "Snorkeling, and fresh seafood, according to Travel Babbo."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  },
+  "bombo": {
+    "title": "Bombo Headland Quarry Geological Site",
+    "price": 3200,
+    "depositPercent": 0.2,
+    "desc": "A dramatic geological site, moon-like landscape, featuring massive, weathered basalt columns.",
+    "image": "https://assets.atdw-online.com.au/images/a346327b4551c9f454f95726c781c820.jpeg",
+    "imageAlt": "Quarry Geological Site",
+    "region": "australia",
+    "styles": [
+      "city",
+      "culture"
+    ],
+    "nights": 6,
+    "rating": 4.9,
+    "popularity": 88,
+    "budgetTier": "mid",
+    "timezone": "GMT+10",
+    "bestSeason": "Apr–Oct",
+    "lat": -34.65,
+    "lng": 150.8633,
+    "included": [
+      "This popular, free-to-visit photography spot offers stunning views of the coastline, featuring iconic."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  },
+  "kangaroo": {
+    "title": "Kangaroo Island Wildlife Haven",
+    "price": 3600,
+    "depositPercent": 0.2,
+    "desc": "As Australia's third-largest island, it features rugged coastlines, pristine beaches, diverse wildlife.",
+    "image": "https://images.unsplash.com/photo-1680755388280-61b72e98a309?q=80&w=1170",
+    "imageAlt": "Wildlife Haven",
+    "region": "australia",
+    "styles": [
+      "romantic",
+      "wellness"
+    ],
+    "nights": 4,
+    "rating": 4.77,
+    "popularity": 88,
+    "budgetTier": "high",
+    "timezone": "GMT+9:30",
+    "bestSeason": "May-Sep",
+    "lat": -35.8044,
+    "lng": 137.2275,
+    "included": [
+      "Flinders Chase National Park, Seal Bay, and Remarkable Rocks."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  },
+  "sapa": {
+    "title": "Sapa City in the Cloud",
+    "price": 3750,
+    "depositPercent": 0.2,
+    "desc": "A scenic, mountainous town in Northwest Vietnam renowned for its dramatic rice terraces, cool climate, and rich ethnic minority culture.",
+    "image": "https://images.unsplash.com/photo-1665905905591-fb66b0496481?q=80&w=1074",
+    "imageAlt": "City in the Cloud",
+    "region": "vietnam",
+    "styles": [
+      "city",
+      "adventure"
+    ],
+    "nights": 5,
+    "rating": 4.87,
+    "popularity": 88,
+    "budgetTier": "high",
+    "timezone": "GMT+7",
+    "bestSeason": "Mar–May . Sep–Nov",
+    "lat": 22.3402,
+    "lng": 103.844,
+    "included": [
+      "Located in Lao Cai province, it serves as a top trekking destination, offering breathtaking views of the Hoang Lien Son Mountains."
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "georgia": {
+    "title": "Georgia City of Love",
+    "price": 3950,
+    "depositPercent": 0.2,
+    "desc": "Best for hiking, adventure, and beach activities in Batumi, although it is the busiest time.",
+    "image": "https://georgiastartshere.ge/wp-content/uploads/2025/06/shutterstock_2607127567-2.jpg",
+    "imageAlt": "City of Love",
+    "region": "usa",
+    "styles": [
+      "city",
+      "adventure"
+    ],
+    "nights": 8,
+    "rating": 4.67,
+    "popularity": 90,
+    "budgetTier": "high",
+    "timezone": "GMT-4",
+    "bestSeason": "Mar–Jun . Sep–Nov",
+    "lat": 32.1574,
+    "lng": 82.9071,
+    "included": [
+      "ancient wine culture, rich history, and the Caucasus Mountains, it is a developing parliamentary republic."
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "beaber": {
+    "title": "Beaver Vally A Nature of Lover's Escape",
+    "price": 3680,
+    "depositPercent": 0.2,
+    "desc": "Hiking at Old Baldy, viewing waterfalls like Eugenia Falls and Hoggs Falls.",
+    "image": "https://images.unsplash.com/photo-1510116760705-d5155499ea67?q=80&w=1074",
+    "imageAlt": "A Nature of Lover's Escape",
+    "region": "usa",
+    "styles": [
+      "romantic",
+      "wellness"
+    ],
+    "nights": 7,
+    "rating": 4.87,
+    "popularity": 90,
+    "budgetTier": "high",
+    "timezone": "GMT-4",
+    "bestSeason": "Dec–Mar",
+    "lat": 44.38461,
+    "lng": -80.54106,
+    "included": [
+      "Visiting charming towns like Kimberley, Thornbury, and Meaford."
+    ],
+    "notIncluded": [
+      "Domestic hops to other islands unless added"
+    ],
+    "faq": [
+      {
+        "q": "Nyepi closure?",
+        "a": "We block dates around Silent Day when airport closes."
+      }
+    ]
+  },
+  "kalimpong": {
+    "title": "Kalimpong The Nest of Smiles",
+    "price": 1350,
+    "depositPercent": 0.2,
+    "desc": "Popular for hiking, trekking, panoramic Kanchenjunga views.",
+    "image": "https://plus.unsplash.com/premium_photo-1697729733902-f8c92710db07?q=80&w=870",
+    "imageAlt": "The Nest of Smiles",
+    "region": "northeastern-india",
+    "styles": [
+      "romantic",
+      "adventure"
+    ],
+    "nights": 4,
+    "rating": 4.9,
+    "popularity": 90,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Mar–May . Oct–Feb",
+    "lat": 27.0594,
+    "lng": 88.4695,
+    "included": [
+      "Top attractions include Deolo Hill, Durpin Dara Hill, and the historic Morgan House."
+    ],
+    "notIncluded": [
+      "Domestic hops to other islands unless added"
+    ],
+    "faq": [
+      {
+        "q": "Nyepi closure?",
+        "a": "We block dates around Silent Day when airport closes."
+      }
+    ]
+  },
+  "cock": {
+    "title": "Hen and Cock Mountain Trail",
+    "price": 3580,
+    "depositPercent": 0.2,
+    "desc": "It is a major destination for climbers and tourists, with the nearby Mount Cook Village serving as a base.",
+    "image": "https://images.unsplash.com/photo-1739582766930-1da8be78f10b?w=500&auto=format&fit=crop&q=60",
+    "imageAlt": "Cock Mountain Trail",
+    "region": "new zealand",
+    "styles": [
+      "romantic",
+      "city"
+    ],
+    "nights": 7,
+    "rating": 4.9,
+    "popularity": 88,
+    "budgetTier": "high",
+    "timezone": "GMT+12",
+    "bestSeason": "Mar–May",
+    "lat": -43.595,
+    "lng": 170.1419,
+    "included": [
+      "Glaciated terrain, steep peaks, and as a premier location for mountaineering and hiking."
+    ],
+    "notIncluded": [
+      "International flights to Malé",
+      "Premium alcohol packages"
+    ],
+    "faq": [
+      {
+        "q": "Eco credentials?",
+        "a": "We prioritise resorts with documented reef-protection programmes."
+      }
+    ]
+  },
+  "megha": {
+    "title": "Seven Sister Waterfal",
+    "price": 1650,
+    "depositPercent": 0.2,
+    "desc": "The waterfalls are seasonal, roaring at peak capacity during the monsoon.",
+    "image": "https://tse3.mm.bing.net/th/id/OIP.P5YEBUgqRmfqkYwX3GaVsgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "imageAlt": "Seven Sister Waterfal",
+    "region": "northeastern-india",
+    "styles": [
+      "romantic",
+      "adventure"
+    ],
+    "nights": 5,
+    "rating": 4.8,
+    "popularity": 88,
+    "budgetTier": "low",
+    "timezone": "GMT+5:30",
+    "bestSeason": "Jun–Sep",
+    "lat": 25.243,
+    "lng": 91.743,
+    "included": [
+      "The best views are from the dedicated viewpoint near Mawsmai village or from the nearby Eco Park on top of the plateau."
+    ],
+    "notIncluded": [
+      "Alcohol outside hotel packages"
+    ],
+    "faq": [
+      {
+        "q": "Ramadan timing?",
+        "a": "We adjust dining and entertainment expectations."
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+<?php
+/**
+ * Rename to stripe-create-intent.php and install:
+ *   composer require stripe/stripe-php
+ * Set STRIPE_SECRET_KEY in Apache/php.ini or a local .env loader.
+ *
+ * Client POST body: JSON { "amount": 12345, "currency": "aud", "metadata": {...} }
+ * Returns: { "clientSecret": "..." }
+ */
+header('Content-Type: application/json');
+
+$secret = getenv('STRIPE_SECRET_KEY');
+if (!$secret) {
+  http_response_code(503);
+  echo json_encode(['error' => 'STRIPE_SECRET_KEY not configured']);
+  exit;
+}
+
+// require_once __DIR__ . '/../vendor/autoload.php';
+// \Stripe\Stripe::setApiKey($secret);
+// $intent = \Stripe\PaymentIntent::create([...]);
+
+http_response_code(501);
+echo json_encode([
+  'error' => 'Implement with Stripe PHP SDK — see policies.html#stripe',
+]);

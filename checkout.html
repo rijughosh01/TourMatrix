@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan your trip | TourMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="TourMatrix Travel Agency home">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <nav class="nav-main" id="primary-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest"><a href="register.html" class="btn-nav btn-nav--primary">Create account</a></div>
+        <div class="nav-auth" id="nav-user" hidden><button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero page-hero--soft page-hero--checkout">
+      <div class="container">
+        <p class="checkout-steps-intro"><a href="booking.html" class="text-link">← Back to catalogue</a></p>
+        <p class="checkout-eyebrow">Secure checkout</p>
+        <h1>Trip builder</h1>
+        <p id="checkout-trip-title" class="checkout-hero-trip-name" aria-live="polite"></p>
+      </div>
+    </header>
+
+    <section class="section section--checkout section--alt checkout-section" id="checkout-wizard">
+      <div class="container checkout-grid">
+        <div class="checkout-main">
+          <div class="checkout-progress" aria-label="Booking steps">
+            <span class="checkout-progress__step is-active" data-step-dot="0"><span class="checkout-progress__num" aria-hidden="true">1</span> When</span>
+            <span class="checkout-progress__step" data-step-dot="1"><span class="checkout-progress__num" aria-hidden="true">2</span> Who</span>
+            <span class="checkout-progress__step" data-step-dot="2"><span class="checkout-progress__num" aria-hidden="true">3</span> Options</span>
+            <span class="checkout-progress__step" data-step-dot="3"><span class="checkout-progress__num" aria-hidden="true">4</span> Review</span>
+          </div>
+
+          <div class="checkout-step" data-checkout-step="0">
+            <div class="checkout-step-head">
+              <h2 class="checkout-step-title">Travel dates</h2>
+              <p class="checkout-step-lead">Pick when you’d like to travel. You can refine dates with your consultant later.</p>
+            </div>
+            <form id="checkout-start" class="checkout-panel">
+              <div class="form-row-payment checkout-date-row">
+                <div class="form-group">
+                  <label for="travelStart">Start date</label>
+                  <input type="date" id="travelStart" name="travelStart" required class="input-date">
+                </div>
+                <div class="form-group">
+                  <label for="travelEnd">End date</label>
+                  <input type="date" id="travelEnd" name="travelEnd" required class="input-date">
+                </div>
+              </div>
+              <div class="checkout-actions checkout-actions--single">
+                <button type="submit" class="btn btn--primary btn--checkout-next">Continue</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="checkout-step" id="step-who" hidden aria-hidden="true">
+            <div class="checkout-step-head">
+              <h2 class="checkout-step-title">Travellers</h2>
+              <p class="checkout-step-lead">Tell us how many people are travelling so we can quote accommodation correctly.</p>
+            </div>
+            <form id="checkout-who" class="checkout-panel">
+              <div class="form-row-payment">
+                <div class="form-group">
+                  <label for="adults">Adults</label>
+                  <input type="number" id="adults" name="adults" min="1" max="12" value="2" required>
+                </div>
+                <div class="form-group">
+                  <label for="children">Children</label>
+                  <input type="number" id="children" name="children" min="0" max="10" value="0">
+                </div>
+              </div>
+              <div class="checkout-actions">
+                <button type="button" class="btn btn--outline" data-goto-step="0">Back</button>
+                <button type="submit" class="btn btn--primary btn--checkout-next">Continue</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="checkout-step" hidden aria-hidden="true">
+            <div class="checkout-step-head">
+              <h2 class="checkout-step-title">Add-ons</h2>
+              <p class="checkout-step-lead">Optional extras — add now or discuss with your WanderLux consultant.</p>
+            </div>
+            <form id="checkout-options" class="checkout-panel">
+              <fieldset class="checkout-addon-fieldset">
+                <legend class="visually-hidden">Optional services</legend>
+                <label class="checkout-addon">
+                  <input type="checkbox" id="insurance" name="insurance">
+                  <span class="checkout-addon__body">
+                    <span class="checkout-addon__title">Travel insurance bundle</span>
+                    <span class="checkout-addon__meta">Peace of mind · <strong>+$120</strong></span>
+                  </span>
+                </label>
+                <label class="checkout-addon">
+                  <input type="checkbox" id="transfer" name="transfer">
+                  <span class="checkout-addon__body">
+                    <span class="checkout-addon__title">Airport transfer package</span>
+                    <span class="checkout-addon__meta">Meet &amp; greet · <strong>+$90</strong></span>
+                  </span>
+                </label>
+              </fieldset>
+              <div class="checkout-actions">
+                <button type="button" class="btn btn--outline" data-goto-step="1">Back</button>
+                <button type="submit" class="btn btn--primary btn--checkout-next">Continue</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="checkout-step" hidden aria-hidden="true">
+            <div class="checkout-step-head">
+              <h2 class="checkout-step-title">Review</h2>
+              <p class="checkout-step-lead">Check your choices, then continue to pay your deposit securely.</p>
+            </div>
+            <div id="checkout-review" class="checkout-panel checkout-panel--review"></div>
+            <div class="checkout-actions">
+              <button type="button" class="btn btn--outline" data-goto-step="2">Back</button>
+              <button type="button" class="btn btn--primary btn--checkout-next" id="checkout-go-payment">Continue to payment</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="checkout-sticky-wrap" aria-label="Booking summary">
+          <div id="checkout-sticky-summary" class="checkout-summary-card"></div>
+          <p class="checkout-summary-footnote">Deposit % is estimated from your package and selected options. Final invoice confirms flights and taxes.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="index.html" class="footer-logo">Tour<span>Matrix</span></a><p>World tours with a human team.</p></div>
+      <div><h3>Explore</h3><ul><li><a href="booking.html">Book a trip</a></li><li><a href="policies.html">Policies</a></li><li><a href="my-trips.html">My trips</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="contact.html">Office</a></li><li><a href="tel:+91 7076683501">+91 7 0766 83501</a></li></ul></div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency.</p>
+  </footer>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title"></h3>
+      <p id="modal-message"></p>
+      <button type="button" class="btn btn--primary btn-block" id="modal-close">OK</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact TourMatrix Travel Agency in Melbourne: office address, phone, email, map, and secure enquiry form for general questions.">
+  <title>Contact Us | TourMatrix Travel Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="TourMatrix Travel Agency home">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-main" id="primary-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest">
+          <a href="register.html" class="btn-nav btn-nav--primary">Create account</a>
+        </div>
+        <div class="nav-auth" id="nav-user" hidden>
+          <button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero">
+      <div class="container">
+        <h1>Contact us</h1>
+        <p>Visit our Collins Street office, call, email, or send a message — we aim to reply within one business day.</p>
+      </div>
+    </header>
+
+    <section class="section section--alt" aria-labelledby="contact-details-heading">
+      <div class="container contact-layout">
+        <div data-aos="fade-up">
+          <h2 class="section__title text-center section__title--compact" id="contact-details-heading">Office &amp; map</h2>
+          <div class="contact-info">
+            <h3 class="mt-0">TourMatrix Travel Agency</h3>
+            <dl>
+              <dt>Address</dt>
+              <dd>
+                <address>
+                  block - S,  salt lake, sector v, bidhannagar<br>
+                  kolkata, 700091<br>
+                  West Bengal
+                </address>
+              </dd>
+              <dt>Phone</dt>
+              <dd><a href="tel:+91 7076683501">+91 7 0766 83501</a></dd>
+              <dt>Email</dt>
+              <dd><a href="mailto:info@tourmatrix.com">info@tourmatrix.com</a></dd>
+              <dt>Appointments</dt>
+              <dd><a href="mailto:appointments@tourmatrix.com">appointments@tourmatrix.com</a></dd>
+              <dt>Hours</dt>
+              <dd>Monday–Friday 9:00–17:30 AEST<br>Saturday by appointment</dd>
+            </dl>
+            <div class="map-embed">
+              <iframe
+                title="TourMatrix office location near Collins Street Melbourne"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14736.293639699978!2d88.433983!3d22.57635755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275b020703c0d%3A0xece6f8e0fc2e1613!2sSector%20V%2C%20Bidhannagar%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1778582170828!5m2!1sen!2sin" 
+                width="600"
+                height="280"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="80">
+          <h2 class="section__title text-center section__title--compact">Send a message</h2>
+          <form id="contact-form" class="form-card" novalidate>
+            <div class="form-group" data-field="contactName">
+              <label for="contactName">Your name</label>
+              <input type="text" id="contactName" name="contactName" autocomplete="name" required aria-required="true">
+              <span class="field-error" role="alert">Please enter your name.</span>
+            </div>
+            <div class="form-group" data-field="contactEmail">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" name="contactEmail" autocomplete="email" required aria-required="true">
+              <span class="field-error" role="alert">Enter a valid email.</span>
+            </div>
+            <div class="form-group" data-field="contactTopic">
+              <label for="contactTopic">Topic</label>
+              <select id="contactTopic" name="contactTopic" required aria-required="true">
+                <option value="">Select a topic</option>
+                <option value="General enquiry">General enquiry</option>
+                <option value="Quote follow-up">Quote follow-up</option>
+                <option value="Corporate travel">Corporate travel</option>
+                <option value="Feedback">Feedback</option>
+              </select>
+              <span class="field-error" role="alert">Please choose a topic.</span>
+            </div>
+            <div class="form-group" data-field="contactMessage">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="contactMessage" required aria-required="true" minlength="10"></textarea>
+              <span class="field-error" role="alert">Enter at least 10 characters.</span>
+            </div>
+            <button type="submit" class="btn btn--primary btn-block">Email TourMatrix</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Tour<span>Matrix</span></a>
+        <p>Book curated travel with a human team behind every itinerary.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="policies.html">Policies</a></li>
+          <li><a href="login.html">Member login</a></li>
+          <li><a href="about.html">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="contact.html">Office &amp; map</a></li>
+          <li><a href="tel:+91 7076683501">+91 7 0766 83501</a></li>
+          <li><a href="mailto:info@tourmatrix.com">info@tourmatrix.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency. All rights reserved.</p>
+  </footer>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title">Title</h3>
+      <p id="modal-message">Message</p>
+      <button type="button" class="btn btn--secondary" id="modal-close">Close</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

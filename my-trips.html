@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My trips | TourMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+      <nav class="nav-main" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="my-trips.html" class="active">My trips</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest"><a href="register.html" class="btn-nav btn-nav--primary">Create account</a></div>
+        <div class="nav-auth" id="nav-user" hidden><button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero page-hero--soft">
+      <div class="container">
+        <h1>My trips</h1>
+        <p>Saved shortlist and deposits stored in this browser (demo — production would sync to your account).</p>
+      </div>
+    </header>
+
+    <section class="section section--alt">
+      <div class="container two-col my-trips-cols">
+        <div class="form-card">
+          <h2 class="section__title section__title--left section__title--compact">Deposit history</h2>
+          <ul id="my-trips-list" class="my-trips-list"></ul>
+        </div>
+        <div class="form-card">
+          <h2 class="section__title section__title--left section__title--compact">Saved trips</h2>
+          <ul id="my-saved-list" class="my-trips-list"></ul>
+          <p class="form-hint mt-0">Toggle saves from the bookmark on any package card.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="index.html" class="footer-logo">Tour<span>Matrix</span></a><p>World tours with a human team.</p></div>
+      <div><h3>Explore</h3><ul><li><a href="booking.html">Book</a></li><li><a href="policies.html">Policies</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="contact.html">Office</a></li></ul></div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency.</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

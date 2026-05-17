@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete your TourMatrix booking deposit securely. Review your trip summary and pay by card.">
+  <title>Payment | TourMatrix Travel Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="TourMatrix Travel Agency home">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-main" id="primary-navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html" class="active">Payment</a></li>
+          <li><a href="appointment.html">Appointment</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest">
+          <a href="register.html" class="btn-nav btn-nav--primary">Create account</a>
+        </div>
+        <div class="nav-auth" id="nav-user" hidden>
+          <button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <header class="page-hero page-hero--soft">
+      <div class="container">
+        <p class="payment-steps"><a href="booking.html">Browse</a> → <a href="checkout.html">Plan trip</a> → <strong>Pay deposit</strong></p>
+        <h1>Secure checkout</h1>
+        <p>Pay your trip deposit securely with Razorpay. Card details are handled by Razorpay — not stored in this demo site.</p>
+      </div>
+    </header>
+
+    <section class="section section--alt" aria-labelledby="pay-heading">
+      <div class="container payment-layout">
+        <div class="payment-summary form-card form-card--wide" data-aos="fade-right">
+          <h2 class="section__title section__title--left section__title--compact" id="pay-heading">Trip summary</h2>
+          <div id="payment-summary-empty" class="payment-empty">
+            <p>No trip selected yet. Browse packages and tap <strong>Book now</strong> to load your summary here.</p>
+            <a href="booking.html" class="btn btn--secondary">Browse bookable trips</a>
+          </div>
+          <div id="payment-summary-detail" class="payment-detail" hidden>
+            <img id="payment-summary-img" src="" alt="" class="payment-summary__img" width="640" height="360" loading="lazy">
+            <h3 id="payment-summary-title" class="payment-summary__title"></h3>
+            <p id="payment-summary-desc" class="payment-summary__desc"></p>
+            <ul id="payment-summary-extras" class="payment-summary__extras" hidden aria-label="Trip details from planner"></ul>
+            <dl class="payment-summary__meta">
+              <div><dt>Reference</dt><dd id="payment-summary-ref"></dd></div>
+              <div><dt>Total (package + options)</dt><dd id="payment-summary-price"></dd></div>
+              <div><dt>Deposit due today</dt><dd id="payment-summary-deposit"></dd></div>
+            </dl>
+            <p id="payment-deposit-note" class="payment-deposit-hint"></p>
+          </div>
+        </div>
+
+        <div class="form-card form-card--wide payment-form-wrap" data-aos="fade-left">
+          <h2 class="section__title section__title--left section__title--compact">Payment details</h2>
+          <p class="payment-disclaimer">You will be redirected to Razorpay’s secure checkout. Set <code>RAZORPAY_KEY_ID</code> and <code>RAZORPAY_KEY_SECRET</code> in <code>server/.env</code> (see <code>server/.env.example</code>).</p>
+          <form id="payment-form" novalidate>
+            <div class="form-group" data-field="cardName">
+              <label for="cardName">Name on card</label>
+              <input type="text" id="cardName" name="cardName" autocomplete="cc-name" required>
+              <p class="field-error" role="alert">Enter the name as it appears on the card.</p>
+            </div>
+            <div class="form-group" data-field="cardNumber">
+              <label for="cardNumber">Card number</label>
+              <input type="text" id="cardNumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" maxlength="19" required>
+              <p class="field-error" role="alert">Enter a valid 16-digit card number.</p>
+            </div>
+            <div class="form-row-payment">
+              <div class="form-group" data-field="cardExpiry">
+                <label for="cardExpiry">Expiry (MM/YY)</label>
+                <input type="text" id="cardExpiry" name="cardExpiry" autocomplete="cc-exp" placeholder="08/28" maxlength="5" required>
+                <p class="field-error" role="alert">Use MM/YY format.</p>
+              </div>
+              <div class="form-group" data-field="cardCvc">
+                <label for="cardCvc">CVC</label>
+                <input type="text" id="cardCvc" name="cardCvc" inputmode="numeric" autocomplete="cc-csc" maxlength="4" required>
+                <p class="field-error" role="alert">Enter 3 or 4 digits.</p>
+              </div>
+            </div>
+            <div class="form-group" data-field="billingEmail">
+              <label for="billingEmail">Receipt email</label>
+              <input type="email" id="billingEmail" name="billingEmail" autocomplete="email" required>
+              <p class="field-error" role="alert">Enter a valid email.</p>
+            </div>
+            <button type="submit" class="btn btn--primary btn-block" id="payment-submit">Pay with Razorpay</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">Tour<span>Matrix</span></a>
+        <p>Book curated travel with a human team behind every itinerary.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="policies.html">Policies</a></li>
+          <li><a href="login.html">Member login</a></li>
+          <li><a href="about.html">About us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="contact.html">Office &amp; map</a></li>
+          <li><a href="tel:+91 7076683501">+91 7 0766 83501</a></li>
+          <li><a href="mailto:info@tourmatrix.com">info@tourmatrix.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 TourMatrix Travel Agency. All rights reserved.</p>
+  </footer>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title"></h3>
+      <p id="modal-message"></p>
+      <button type="button" class="btn btn--primary btn-block" id="modal-close">OK</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

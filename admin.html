@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WanderLux admin dashboard — manage trips, destinations, images, users, and payments.">
+  <title>Admin Dashboard | WanderLux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Tour<span>Matrix</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span><span></span></button>
+      <nav class="nav-main" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Book a trip</a></li>
+          <li><a href="my-trips.html">My trips</a></li>
+          <li><a href="payment.html">Payment</a></li>
+          <li class="nav-admin-item" hidden><a href="admin.html" class="active">Admin</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-guest"><a href="register.html" class="btn-nav btn-nav--primary">Create account</a></div>
+        <div class="nav-auth" id="nav-user" hidden><button type="button" class="btn-nav btn-nav--logout" id="btn-logout">Log out</button></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="admin-page">
+    <header class="page-hero page-hero--soft admin-page__hero">
+      <div class="container admin-page__hero-inner">
+        <div class="admin-page__hero-copy">
+          <p class="admin-page__eyebrow">Operations</p>
+          <h1>Admin dashboard</h1>
+          <p class="admin-page__lead">Manage trips, uploads, customers, bookings, and audit trails — one place for your TourMatrix back office.</p>
+        </div>
+        <ul class="admin-page__quick" aria-label="Quick links">
+          <li><a href="#admin-editor" class="admin-quick-link">Trip editor</a></li>
+          <li><a href="#admin-directory" class="admin-quick-link">Catalog &amp; users</a></li>
+          <li><a href="#admin-inbox" class="admin-quick-link">Inbox</a></li>
+          <li><a href="#admin-bookings-panel" class="admin-quick-link">Bookings</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="section section--alt admin-page__body">
+      <div class="container container--admin" id="admin-dashboard">
+        <div class="admin-shell">
+          <aside class="admin-sidebar" aria-label="Dashboard sections">
+            <p class="admin-sidebar__label">Sections</p>
+            <nav class="admin-side-nav">
+              <a href="#admin-overview" class="admin-side-nav__link">Overview</a>
+              <a href="#admin-editor" class="admin-side-nav__link">Trip editor</a>
+              <a href="#admin-directory" class="admin-side-nav__link">Users &amp; trips</a>
+              <a href="#admin-inbox" class="admin-side-nav__link">Inbox</a>
+              <a href="#admin-bookings-panel" class="admin-side-nav__link">Bookings</a>
+              <a href="#admin-audit" class="admin-side-nav__link">Audit log</a>
+            </nav>
+          </aside>
+
+          <div class="admin-main">
+        <section id="admin-overview" class="admin-panel">
+        <div class="form-card form-card--wide admin-card admin-card--surface" data-aos="fade-up">
+          <div class="admin-card__head">
+            <div>
+              <h2 class="admin-panel-title">Overview</h2>
+              <p class="admin-panel-sub">Live counts from your database</p>
+            </div>
+            <button type="button" class="btn btn--outline btn-small" id="admin-refresh-stats">Refresh stats</button>
+          </div>
+          <div id="admin-stats" class="admin-kpi-grid" aria-live="polite"></div>
+        </div>
+        </section>
+
+        <section id="admin-editor" class="admin-panel">
+        <div class="form-card form-card--wide admin-card admin-card--accent" data-aos="fade-up">
+          <div class="admin-card__head">
+            <div>
+              <h2 class="admin-panel-title">Trip &amp; destination editor</h2>
+              <p class="admin-hint admin-hint--inline" id="admin-cloudinary-hint">Checking image upload…</p>
+            </div>
+            <button type="button" class="btn btn--secondary btn-small" id="admin-dest-clear">New trip</button>
+          </div>
+
+          <form id="admin-destination-form" class="admin-trip-form" novalidate>
+            <input type="hidden" name="originalSlug" id="admin-dest-original-slug" value="">
+
+            <fieldset class="admin-fieldset">
+              <legend>Basics</legend>
+              <div class="admin-form-grid">
+                <div class="form-group">
+                  <label for="admin-dest-slug">URL slug</label>
+                  <input id="admin-dest-slug" name="slug" type="text" required placeholder="e.g. goa-beach" autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-title">Title</label>
+                  <input id="admin-dest-title" name="title" type="text" required placeholder="Package title">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-price">Price (AUD)</label>
+                  <input id="admin-dest-price" name="price" type="number" min="0" step="1" required placeholder="4200">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-deposit">Deposit fraction (0–1)</label>
+                  <input id="admin-dest-deposit" name="depositPercent" type="number" min="0" max="1" step="0.01" value="0.2" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-desc">Description</label>
+                <textarea id="admin-dest-desc" name="desc" rows="3" placeholder="Short marketing description shown on cards"></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset class="admin-fieldset">
+              <legend>Media (Cloudinary)</legend>
+              <div class="admin-media-row">
+                <div class="form-group">
+                  <label for="admin-dest-image-file">Upload image</label>
+                  <input id="admin-dest-image-file" type="file" accept="image/*">
+                  <p class="form-hint mt-0">JPEG, PNG, or WebP — max 5&nbsp;MB. Uses your Cloudinary credentials on the server.</p>
+                </div>
+                <div class="admin-media-actions">
+                  <button type="button" class="btn btn--secondary" id="admin-dest-upload-btn">Upload to Cloudinary</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-image">Image URL</label>
+                <input id="admin-dest-image" name="image" type="url" placeholder="https://res.cloudinary.com/...">
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-image-alt">Image alt text</label>
+                <input id="admin-dest-image-alt" name="imageAlt" type="text" placeholder="Accessibility description">
+              </div>
+              <div class="admin-image-preview-wrap">
+                <img id="admin-dest-preview" class="admin-image-preview" alt="" hidden>
+              </div>
+            </fieldset>
+
+            <fieldset class="admin-fieldset">
+              <legend>Catalogue &amp; map</legend>
+              <div class="admin-form-grid">
+                <div class="form-group">
+                  <label for="admin-dest-region">Region</label>
+                  <input id="admin-dest-region" name="region" type="text" placeholder="Asia-Pacific">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-budget">Budget tier</label>
+                  <input id="admin-dest-budget" name="budgetTier" type="text" placeholder="mid / luxury">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-nights">Nights</label>
+                  <input id="admin-dest-nights" name="nights" type="number" min="1" step="1" placeholder="7">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-rating">Rating</label>
+                  <input id="admin-dest-rating" name="rating" type="number" min="0" max="5" step="0.01" placeholder="4.85">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-popularity">Popularity</label>
+                  <input id="admin-dest-popularity" name="popularity" type="number" min="0" step="1" placeholder="80">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-styles">Styles (comma-separated)</label>
+                  <input id="admin-dest-styles" name="styles" type="text" placeholder="beach, wellness">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-timezone">Timezone</label>
+                  <input id="admin-dest-timezone" name="timezone" type="text" placeholder="WITA">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-season">Best season</label>
+                  <input id="admin-dest-season" name="bestSeason" type="text" placeholder="Apr–Oct">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-lat">Latitude</label>
+                  <input id="admin-dest-lat" name="lat" type="number" step="any" placeholder="-8.4">
+                </div>
+                <div class="form-group">
+                  <label for="admin-dest-lng">Longitude</label>
+                  <input id="admin-dest-lng" name="lng" type="number" step="any" placeholder="115.2">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-included">Included (one per line)</label>
+                <textarea id="admin-dest-included" name="included" rows="3" placeholder="Airport meet&#10;Daily breakfast"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-notincluded">Not included (one per line)</label>
+                <textarea id="admin-dest-notincluded" name="notIncluded" rows="2" placeholder="International flights"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="admin-dest-faq">FAQ (one per line: question|answer)</label>
+                <textarea id="admin-dest-faq" name="faq" rows="3" placeholder="When to book?|We recommend 60–90 days ahead."></textarea>
+              </div>
+            </fieldset>
+
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn--primary" id="admin-dest-submit">Save trip</button>
+            </div>
+          </form>
+        </div>
+        </section>
+
+        <section id="admin-directory" class="admin-panel">
+        <div class="admin-two-grid admin-two-grid--stretch" data-aos="fade-up">
+          <div class="form-card admin-card admin-card--surface">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Users</h3>
+                <p class="admin-panel-sub">Roles and account status</p>
+              </div>
+            </div>
+            <div class="form-group admin-filter-field">
+              <label class="visually-hidden" for="admin-user-filter">Filter users</label>
+              <input type="search" id="admin-user-filter" placeholder="Search name or email…" autocomplete="off">
+            </div>
+            <ul id="admin-users-list" class="admin-list admin-list--scroll admin-list--users"></ul>
+          </div>
+          <div class="form-card admin-card admin-card--surface">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Trip catalog</h3>
+                <p class="admin-panel-sub">Tap edit to load a package into the editor above</p>
+              </div>
+            </div>
+            <div class="form-group admin-filter-field">
+              <label class="visually-hidden" for="admin-dest-filter">Filter trips</label>
+              <input type="search" id="admin-dest-filter" placeholder="Filter by title or slug…" autocomplete="off">
+            </div>
+            <ul id="admin-destinations-list" class="admin-list admin-list--scroll admin-list--dest"></ul>
+          </div>
+        </div>
+        </section>
+
+        <section id="admin-inbox" class="admin-panel">
+        <div class="admin-two-grid admin-two-grid--stretch" data-aos="fade-up">
+          <div class="form-card admin-card admin-card--surface">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Contact messages</h3>
+                <p class="admin-panel-sub">Submissions from the contact form</p>
+              </div>
+              <button type="button" class="btn btn--ghost btn-small" id="admin-contacts-refresh">Refresh</button>
+            </div>
+            <ul id="admin-contacts-list" class="admin-list admin-list--scroll admin-list--inbox"></ul>
+            <div class="admin-pager" id="admin-contacts-pager" hidden></div>
+          </div>
+          <div class="form-card admin-card admin-card--surface">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Appointment requests</h3>
+                <p class="admin-panel-sub">Consultation requests from visitors</p>
+              </div>
+              <button type="button" class="btn btn--ghost btn-small" id="admin-appointments-refresh">Refresh</button>
+            </div>
+            <ul id="admin-appointments-list" class="admin-list admin-list--scroll admin-list--inbox"></ul>
+            <div class="admin-pager" id="admin-appointments-pager" hidden></div>
+          </div>
+        </div>
+        </section>
+
+        <section id="admin-bookings-panel" class="admin-panel">
+        <div class="admin-two-grid admin-two-grid--stretch" data-aos="fade-up">
+          <div class="form-card admin-card admin-card--surface">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Bookings</h3>
+                <p class="admin-panel-sub">Filter the list, then patch status or refund notes</p>
+              </div>
+              <button type="button" class="btn btn--outline btn-small" id="admin-bookings-refresh">Apply filters</button>
+            </div>
+            <div class="admin-booking-filters admin-form-grid">
+              <div class="form-group">
+                <label for="admin-booking-status">Status</label>
+                <select id="admin-booking-status">
+                  <option value="">All</option>
+                  <option value="draft">draft</option>
+                  <option value="checkout">checkout</option>
+                  <option value="paid">paid</option>
+                  <option value="cancelled">cancelled</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="admin-booking-slug">Destination slug</label>
+                <input id="admin-booking-slug" type="text" placeholder="maldives">
+              </div>
+              <div class="form-group">
+                <label for="admin-booking-from">From (ISO date)</label>
+                <input id="admin-booking-from" type="date">
+              </div>
+              <div class="form-group">
+                <label for="admin-booking-to">To (ISO date)</label>
+                <input id="admin-booking-to" type="date">
+              </div>
+            </div>
+            <div class="admin-booking-update" role="group" aria-labelledby="admin-booking-update-heading">
+              <h4 id="admin-booking-update-heading" class="admin-booking-update__legend">Update booking</h4>
+            <form id="admin-booking-form" class="admin-form-stack admin-booking-patch">
+              <div class="form-group admin-booking-patch__field">
+                <label for="admin-booking-ref-input">Booking reference</label>
+                <input id="admin-booking-ref-input" type="text" name="ref" placeholder="WLX-…" required autocomplete="off">
+              </div>
+              <div class="admin-form-grid admin-form-grid--tight">
+                <div class="form-group admin-booking-patch__field">
+                  <label for="admin-booking-status-select">New status</label>
+                  <select id="admin-booking-status-select" name="status">
+                    <option value="">No change</option>
+                    <option value="draft">draft</option>
+                    <option value="checkout">checkout</option>
+                    <option value="paid">paid</option>
+                    <option value="cancelled">cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group admin-booking-patch__field">
+                  <label for="admin-booking-refund-select">Refund status</label>
+                  <select id="admin-booking-refund-select" name="refundStatus">
+                    <option value="">No change</option>
+                    <option value="none">none</option>
+                    <option value="requested">requested</option>
+                    <option value="processing">processing</option>
+                    <option value="completed">completed</option>
+                    <option value="rejected">rejected</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group admin-booking-patch__field">
+                <label for="admin-booking-note">Admin note</label>
+                <textarea id="admin-booking-note" name="adminPaymentNote" rows="3" placeholder="Internal payment or refund note"></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn-block">Save booking changes</button>
+            </form>
+            </div>
+            <p class="admin-list-heading">Matching bookings</p>
+            <ul id="admin-bookings-list" class="admin-list admin-list--scroll admin-list--bookings"></ul>
+            <div class="admin-pager" id="admin-bookings-pager" hidden></div>
+          </div>
+          <div class="form-card admin-card admin-card--surface" id="admin-audit">
+            <div class="admin-card__head">
+              <div>
+                <h3 class="admin-panel-title admin-panel-title--sm">Audit log</h3>
+                <p class="admin-panel-sub">Recent admin and system actions</p>
+              </div>
+            </div>
+            <ul id="admin-audit-list" class="admin-list admin-list--scroll admin-list--audit"></ul>
+            <div class="admin-pager" id="admin-audit-pager" hidden></div>
+          </div>
+        </div>
+        </section>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal">
+      <h3 id="modal-title"></h3>
+      <p id="modal-message"></p>
+      <button type="button" class="btn btn--primary btn-block" id="modal-close">OK</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/trip-data.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
