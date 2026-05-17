@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
-const { body, query, validationResult } = require("express-validator");
+const { body, query, param, validationResult } = require("express-validator");
 
 const { adminRequired } = require("../middleware/auth");
 const User = require("../models/User");
@@ -10,6 +10,7 @@ const Booking = require("../models/Booking");
 const ContactMessage = require("../models/ContactMessage");
 const AppointmentRequest = require("../models/AppointmentRequest");
 const AdminAuditLog = require("../models/AdminAuditLog");
+const Review = require("../models/Review");
 
 const router = express.Router();
 
@@ -678,6 +679,95 @@ router.get(
       });
     } catch (_) {
       res.status(500).json({ error: "Failed to load appointment requests" });
+    }
+  }
+);
+
+router.get(
+  "/reviews",
+  adminRequired,
+  [
+    query("page").optional().isInt({ min: 1 }),
+    query("pageSize").optional().isInt({ min: 1, max: 100 }),
+    query("status").optional().isIn(["pending", "approved", "rejected", ""]),
+  ],
+  async function (req, res) {
+    if (!handleValidation(req, res)) return;
+    try {
+      const page = toPage(req.query.page, 1);
+      const pageSize = toPage(req.query.pageSize, 20);
+      const skip = (page - 1) * pageSize;
+      const filter = {};
+      if (req.query.status) {
+        filter.status = req.query.status;
+      }
+      const [reviews, total] = await Promise.all([
+        Review.find(filter).sort({ createdAt: -1 }).skip(skip).limit(pageSize).lean(),
+        Review.countDocuments(filter),
+      ]);
+      res.json({
+        reviews: reviews.map(function (r) {
+          return {
+            id: String(r._id),
+            bookingRef: r.bookingRef,
+            destinationSlug: r.destinationSlug,
+            rating: r.rating,
+            title: r.title || "",
+            body: r.body || "",
+            authorName: r.authorName,
+            status: r.status,
+            createdAt: r.createdAt,
+          };
+        }),
+        pagination: { page, pageSize, total },
+      });
+    } catch (_) {
+      res.status(500).json({ error: "Failed to load reviews" });
+    }
+  }
+);
+
+router.patch(
+  "/reviews/:id",
+  adminRequired,
+  [
+    param("id").isMongoId(),
+    body("status").isIn(["pending", "approved", "rejected"]),
+  ],
+  async function (req, res) {
+    if (!handleValidation(req, res)) return;
+    try {
+      const review = await Review.findById(req.params.id);
+      if (!review) {
+        return res.status(404).json({ error: "Review not found" });
+      }
+      const prevStatus = review.status;
+      review.status = req.body.status;
+      await review.save();
+      await writeAudit(
+        req,
+        "review.status",
+        "review",
+        String(review._id),
+        "Review " + review.status + " for " + review.bookingRef,
+        { status: prevStatus },
+        { status: review.status, bookingRef: review.bookingRef }
+      );
+      res.json({
+        review: {
+          id: String(review._id),
+          bookingRef: review.bookingRef,
+          destinationSlug: review.destinationSlug,
+          rating: review.rating,
+          title: review.title || "",
+          body: review.body || "",
+          authorName: review.authorName,
+          status: review.status,
+          createdAt: review.createdAt,
+        },
+      });
+    } catch (_) {
+      res.status(500).json({ error: "Failed to update review" });
     }
   }
 );

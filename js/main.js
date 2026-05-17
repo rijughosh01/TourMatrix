@@ -7,6 +7,9 @@
   var STORAGE_SAVED = "wanderlux_saved_destinations";
   var STORAGE_BOOKINGS = "wanderlux_bookings_history";
   var STORAGE_CHECKOUT_DRAFT = "wanderlux_checkout_draft";
+  var THEME_KEY = "wanderlux_theme";
+  var HEART_SVG =
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
 
   function getCatalog() {
     return typeof window !== "undefined" && window.WANDERLUX_TRIP_CATALOG
@@ -57,6 +60,214 @@
     } else {
       localStorage.removeItem(STORAGE_SESSION);
     }
+  }
+
+  function starsHtml(rating) {
+    var n = Math.max(0, Math.min(5, Math.round(Number(rating) || 0)));
+    var out = "";
+    for (var i = 0; i < 5; i++) {
+      out += i < n ? "★" : "☆";
+    }
+    return out;
+  }
+
+  function applyTheme(theme) {
+    var next = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (e) {
+      /* ignore */
+    }
+    var btn = $("#theme-toggle");
+    if (btn) {
+      var isDark = next === "dark";
+      btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      btn.setAttribute("title", isDark ? "Light mode" : "Dark mode");
+      btn.innerHTML = isDark
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>';
+    }
+  }
+
+  function initTheme() {
+    var stored = "";
+    try {
+      stored = localStorage.getItem(THEME_KEY) || "";
+    } catch (e) {
+      stored = "";
+    }
+    if (stored === "dark" || stored === "light") {
+      applyTheme(stored);
+      return;
+    }
+    var prefersDark =
+      typeof window.matchMedia === "function" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(prefersDark ? "dark" : "light");
+  }
+
+  function initThemeToggle() {
+    if ($("#theme-toggle")) return;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = "theme-toggle";
+    btn.className = "theme-toggle theme-toggle--fab";
+    document.body.appendChild(btn);
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") || "light";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+    applyTheme(document.documentElement.getAttribute("data-theme") || "light");
+  }
+
+  function ensureApiStatusBanner() {
+    var el = document.getElementById("api-status-banner");
+    if (el) return el;
+    el = document.createElement("div");
+    el.id = "api-status-banner";
+    el.className = "api-status-banner";
+    el.setAttribute("role", "status");
+    el.hidden = true;
+    var header = $(".site-header");
+    if (header && header.parentNode) {
+      header.parentNode.insertBefore(el, header.nextSibling);
+    } else {
+      document.body.insertBefore(el, document.body.firstChild);
+    }
+    return el;
+  }
+
+  function updateApiStatusBanner() {
+    if (!window.WanderLuxApi || typeof WanderLuxApi.getCatalogLoadState !== "function") return;
+    var banner = ensureApiStatusBanner();
+    var st = WanderLuxApi.getCatalogLoadState();
+    if (st.status === "loading") {
+      banner.hidden = false;
+      banner.className = "api-status-banner";
+      banner.textContent = "Loading latest trips from the server…";
+      return;
+    }
+    if (st.status === "error") {
+      banner.hidden = false;
+      banner.className = "api-status-banner api-status-banner--error";
+      banner.innerHTML =
+        "Could not reach the API (" +
+        escapeHtml(st.error || "network error") +
+        '). Showing offline catalogue. <span class="api-status-banner__actions"><button type="button" class="api-status-banner__btn" id="api-retry-btn">Retry</button></span>';
+      var retry = $("#api-retry-btn");
+      if (retry) {
+        retry.onclick = function () {
+          showCatalogSkeletons();
+          WanderLuxApi.bootstrap()
+            .finally(function () {
+              hideCatalogSkeletons();
+              updateApiStatusBanner();
+              hydrateCatalogMeta();
+              syncBookmarkButtons();
+              filterAndSortTripCards();
+            });
+        };
+      }
+      return;
+    }
+    if (st.slow) {
+      banner.hidden = false;
+      banner.className = "api-status-banner api-status-banner--warn";
+      banner.textContent =
+        "The server was waking up (Render cold start). Trip data may have loaded from your offline catalogue first.";
+      return;
+    }
+    banner.hidden = true;
+    banner.textContent = "";
+  }
+
+  function skeletonCardHtml() {
+    return (
+      '<article class="dest-card dest-card--skeleton" aria-hidden="true">' +
+      '<div class="sk-media"></div>' +
+      '<div class="sk-body"><div class="sk-line sk-line--title"></div>' +
+      '<div class="sk-line"></div><div class="sk-line sk-line--short"></div></div></article>'
+    );
+  }
+
+  function showCatalogSkeletons() {
+    $$(".grid-dest-cards, #trip-catalog-grid").forEach(function (grid) {
+      if (grid.querySelector(".catalog-skeleton-grid")) return;
+      grid.classList.add("is-loading");
+      var sk = document.createElement("div");
+      sk.className = "catalog-skeleton-grid";
+      sk.setAttribute("aria-hidden", "true");
+      var html = "";
+      for (var i = 0; i < 6; i++) {
+        html += skeletonCardHtml();
+      }
+      sk.innerHTML = html;
+      grid.insertBefore(sk, grid.firstChild);
+    });
+  }
+
+  function hideCatalogSkeletons() {
+    $$(".catalog-skeleton-grid").forEach(function (el) {
+      el.remove();
+    });
+    $$(".grid-dest-cards.is-loading, #trip-catalog-grid.is-loading").forEach(function (grid) {
+      grid.classList.remove("is-loading");
+    });
+  }
+
+  function upgradeWishlistButtons() {
+    $$(".dest-card__bookmark").forEach(function (btn) {
+      if (btn.getAttribute("data-heart")) return;
+      btn.innerHTML = HEART_SVG;
+      btn.setAttribute("data-heart", "1");
+      var label = btn.getAttribute("aria-label") || "Save trip";
+      if (label.indexOf("heart") === -1 && label.indexOf("wishlist") === -1) {
+        btn.setAttribute("aria-label", "Add to wishlist");
+      }
+    });
+  }
+
+  function syncWishlistFromServer() {
+    if (!window.WanderLuxApi || !WanderLuxApi.getToken()) {
+      return Promise.resolve(getSavedDestinationIds());
+    }
+    return WanderLuxApi.getSavedSlugs()
+      .then(function (slugs) {
+        var local = getSavedDestinationIds();
+        var map = {};
+        (slugs || []).forEach(function (s) {
+          map[s] = true;
+        });
+        local.forEach(function (s) {
+          map[s] = true;
+        });
+        var merged = Object.keys(map);
+        setSavedDestinationIds(merged);
+        if (merged.length !== (slugs || []).length) {
+          return WanderLuxApi.setSavedSlugs(merged).then(function () {
+            return merged;
+          });
+        }
+        return merged;
+      })
+      .catch(function () {
+        return getSavedDestinationIds();
+      });
+  }
+
+  function toggleWishlistSlug(id) {
+    var saved = getSavedDestinationIds().slice();
+    var i = saved.indexOf(id);
+    if (i === -1) saved.push(id);
+    else saved.splice(i, 1);
+    setSavedDestinationIds(saved);
+    syncBookmarkButtons();
+    if (window.WanderLuxApi && WanderLuxApi.getToken()) {
+      WanderLuxApi.setSavedSlugs(saved).catch(function () {
+        /* keep local */
+      });
+    }
+    return saved;
   }
 
   /* ——— Mobile nav ——— */
@@ -232,6 +443,7 @@
   }
 
   function syncBookmarkButtons() {
+    upgradeWishlistButtons();
     var saved = getSavedDestinationIds();
     $$(".dest-card").forEach(function (card) {
       var id = card.getAttribute("data-dest-id");
@@ -240,6 +452,7 @@
       var isOn = saved.indexOf(id) !== -1;
       btn.classList.toggle("is-saved", isOn);
       btn.setAttribute("aria-pressed", isOn ? "true" : "false");
+      btn.setAttribute("aria-label", isOn ? "Remove from wishlist" : "Add to wishlist");
     });
   }
 
@@ -255,36 +468,18 @@
     $$(".dest-card__bookmark").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
+        e.stopPropagation();
         var card = btn.closest(".dest-card");
         if (!card) return;
         var id = card.getAttribute("data-dest-id");
         if (!id || !getCatalog()[id]) return;
-        var saved = getSavedDestinationIds();
-        var i = saved.indexOf(id);
-        if (i === -1) saved.push(id);
-        else saved.splice(i, 1);
-        setSavedDestinationIds(saved);
-        syncBookmarkButtons();
-        if (window.WanderLuxApi && WanderLuxApi.getToken()) {
-          WanderLuxApi.setSavedSlugs(saved).catch(function () {
-            /* ignore */
-          });
-        }
+        toggleWishlistSlug(id);
       });
     });
 
-    if (window.WanderLuxApi && WanderLuxApi.getToken()) {
-      WanderLuxApi.getSavedSlugs()
-        .then(function (slugs) {
-          if (Array.isArray(slugs) && slugs.length) {
-            setSavedDestinationIds(slugs);
-            syncBookmarkButtons();
-          }
-        })
-        .catch(function () {
-          /* ignore */
-        });
-    }
+    syncWishlistFromServer().then(function () {
+      syncBookmarkButtons();
+    });
 
     $$(".js-book-dest").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -610,7 +805,56 @@
         "</ul>" +
         "<h4>FAQ</h4><dl class=\"trip-detail-faq\">" +
         faq +
-        "</dl>";
+        "</dl>" +
+        "<div id=\"trip-detail-reviews\" class=\"trip-reviews-block\"><p class=\"trip-reviews-summary\">Loading reviews…</p></div>";
+    }
+
+    if (window.WanderLuxApi && typeof WanderLuxApi.getDestinationReviews === "function") {
+      WanderLuxApi.getDestinationReviews(destId)
+        .then(function (data) {
+          var block = $("#trip-detail-reviews");
+          if (!block) return;
+          var summary = data.summary || { averageRating: 0, count: 0 };
+          var reviews = data.reviews || [];
+          if (!summary.count) {
+            block.innerHTML = "<p class=\"trip-reviews-summary\">No traveller reviews yet for this package.</p>";
+            return;
+          }
+          var head =
+            "<p class=\"trip-reviews-summary\">" +
+            starsHtml(summary.averageRating) +
+            " " +
+            summary.averageRating.toFixed(1) +
+            " · " +
+            summary.count +
+            " review" +
+            (summary.count === 1 ? "" : "s") +
+            "</p>";
+          block.innerHTML =
+            head +
+            reviews
+              .slice(0, 5)
+              .map(function (r) {
+                return (
+                  "<article class=\"trip-review-item\">" +
+                  "<p class=\"trip-review-item__meta\"><span class=\"trip-review-item__stars\">" +
+                  starsHtml(r.rating) +
+                  "</span> · " +
+                  escapeHtml(r.authorName) +
+                  " · " +
+                  new Date(r.createdAt).toLocaleDateString("en-AU") +
+                  "</p>" +
+                  (r.title ? "<strong>" + escapeHtml(r.title) + "</strong><br>" : "") +
+                  escapeHtml(r.body || "") +
+                  "</article>"
+                );
+              })
+              .join("");
+        })
+        .catch(function () {
+          var block = $("#trip-detail-reviews");
+          if (block) block.innerHTML = "<p class=\"trip-reviews-summary\">Reviews unavailable right now.</p>";
+        });
     }
 
     overlay.classList.add("is-open");
@@ -1057,6 +1301,10 @@
   function initMyTripsPage() {
     var list = $("#my-trips-list");
     var savedList = $("#my-saved-list");
+    var reviewsSection = $("#my-reviews-section");
+    var reviewsList = $("#my-reviews-list");
+    var reviewSelect = $("#review-booking-ref");
+    var reviewForm = $("#review-submit-form");
     if (!list) return;
 
     function fillLists(history, savedIds) {
@@ -1082,23 +1330,113 @@
 
       if (savedList) {
         if (!savedIds.length) {
-          savedList.innerHTML = "<li>No saved trips.</li>";
+          savedList.innerHTML = "<li>No saved trips yet — tap hearts on package cards.</li>";
         } else {
           savedList.innerHTML = savedIds
             .map(function (id) {
               var c = getCatalog()[id];
-              return "<li>" + (c ? escapeHtml(c.title) : id) + "</li>";
+              return (
+                "<li>" +
+                (c ? escapeHtml(c.title) : escapeHtml(id)) +
+                ' <a href="booking.html">View</a></li>'
+              );
             })
             .join("");
         }
       }
+
+      if (reviewSelect && history.length) {
+        reviewSelect.innerHTML =
+          '<option value="">Select a paid booking…</option>' +
+          history
+            .map(function (h) {
+              return (
+                '<option value="' +
+                escapeHtml(h.ref) +
+                '">' +
+                escapeHtml(h.title) +
+                " (" +
+                escapeHtml(h.ref) +
+                ")</option>"
+              );
+            })
+            .join("");
+      }
+    }
+
+    function renderMyReviews(reviews) {
+      if (!reviewsList) return;
+      if (!reviews.length) {
+        reviewsList.innerHTML = "<li>You have not submitted any reviews yet.</li>";
+        return;
+      }
+      reviewsList.innerHTML = reviews
+        .map(function (r) {
+          var pillClass = "review-status-pill";
+          if (r.status === "approved") pillClass += " review-status-pill--approved";
+          if (r.status === "rejected") pillClass += " review-status-pill--rejected";
+          return (
+            "<li><span class=\"" +
+            pillClass +
+            "\">" +
+            escapeHtml(r.status) +
+            "</span> · " +
+            starsHtml(r.rating) +
+            " <strong>" +
+            escapeHtml(r.title || r.destinationSlug) +
+            "</strong> — " +
+            escapeHtml(r.bookingRef) +
+            "<br>" +
+            escapeHtml(r.body || "") +
+            "</li>"
+          );
+        })
+        .join("");
+    }
+
+    function initReviewForm() {
+      if (!reviewForm || !window.WanderLuxApi || !WanderLuxApi.getToken()) return;
+      reviewForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var ref = reviewSelect ? reviewSelect.value : "";
+        var rating = parseInt($("#review-rating").value, 10);
+        var title = $("#review-title").value.trim();
+        var body = $("#review-body").value.trim();
+        var msg = $("#review-form-msg");
+        if (!ref) {
+          if (msg) msg.textContent = "Choose a booking reference.";
+          return;
+        }
+        if (!body) {
+          if (msg) msg.textContent = "Please write your review.";
+          return;
+        }
+        WanderLuxApi.submitReview(ref, rating, title, body)
+          .then(function () {
+            if (msg) msg.textContent = "Thanks! Your review is pending moderation.";
+            reviewForm.reset();
+            return WanderLuxApi.getMyReviews();
+          })
+          .then(function (revs) {
+            renderMyReviews(revs || []);
+          })
+          .catch(function (err) {
+            if (msg) msg.textContent = (err && err.message) || "Could not submit review.";
+          });
+      });
     }
 
     if (window.WanderLuxApi && WanderLuxApi.getToken()) {
-      Promise.all([WanderLuxApi.myPaidBookings(), WanderLuxApi.getSavedSlugs()])
-        .then(function (pair) {
-          var bookings = pair[0] || [];
-          var slugs = pair[1] || [];
+      if (reviewsSection) reviewsSection.hidden = false;
+      Promise.all([
+        WanderLuxApi.myPaidBookings(),
+        WanderLuxApi.getSavedSlugs(),
+        WanderLuxApi.getMyReviews(),
+      ])
+        .then(function (triple) {
+          var bookings = triple[0] || [];
+          var slugs = triple[1] || [];
+          var myReviews = triple[2] || [];
           var history = bookings.map(function (b) {
             return {
               title: b.title,
@@ -1107,20 +1445,19 @@
               paidAt: b.paidAt,
             };
           });
+          if (slugs.length) setSavedDestinationIds(slugs);
           fillLists(history, slugs.length ? slugs : getSavedDestinationIds());
+          renderMyReviews(myReviews);
+          initReviewForm();
         })
         .catch(function () {
-          var history = [];
-          try {
-            history = JSON.parse(localStorage.getItem(STORAGE_BOOKINGS) || "[]");
-          } catch (e) {
-            history = [];
-          }
-          fillLists(history, getSavedDestinationIds());
+          fillLists([], getSavedDestinationIds());
+          if (reviewsList) reviewsList.innerHTML = "<li>Could not load reviews.</li>";
         });
       return;
     }
 
+    if (reviewsSection) reviewsSection.hidden = true;
     var history = [];
     try {
       history = JSON.parse(localStorage.getItem(STORAGE_BOOKINGS) || "[]");
@@ -1359,7 +1696,7 @@
               key: orderData.keyId,
               amount: orderData.amount,
               currency: orderData.currency,
-              name: "WanderLux Travel Agency",
+              name: "TourMatrix Travel Agency",
               description: "Trip booking deposit",
               order_id: orderData.orderId,
               prefill: {
@@ -1713,13 +2050,7 @@
       if (window.WanderLuxApi) {
         WanderLuxApi.register(fullName, email, password)
           .then(function () {
-            var localSaved = getSavedDestinationIds();
-            if (localSaved.length) {
-              return WanderLuxApi.setSavedSlugs(localSaved).catch(function () {
-                return null;
-              });
-            }
-            return null;
+            return syncWishlistFromServer();
           })
           .then(function () {
             showModal(
@@ -1874,6 +2205,9 @@
     var appointmentsWrap = $("#admin-appointments-list");
     var contactsPagerEl = $("#admin-contacts-pager");
     var appointmentsPagerEl = $("#admin-appointments-pager");
+    var reviewsWrap = $("#admin-reviews-list");
+    var reviewsPagerEl = $("#admin-reviews-pager");
+    var reviewStatusFilter = $("#admin-review-status-filter");
     var bookingsPagerEl = $("#admin-bookings-pager");
     var auditPagerEl = $("#admin-audit-pager");
     var lastUsersRaw = [];
@@ -2445,6 +2779,74 @@
         });
     }
 
+    function loadReviews(page) {
+      var status = reviewStatusFilter ? reviewStatusFilter.value : "pending";
+      WanderLuxApi.adminReviews(page || 1, 15, status)
+        .then(function (r) {
+          var list = (r && r.reviews) || [];
+          if (!reviewsWrap) return;
+          if (!list.length) {
+            reviewsWrap.innerHTML = "<li class=\"admin-empty-hint\">No reviews in this filter.</li>";
+          } else {
+            reviewsWrap.innerHTML = list
+              .map(function (rev) {
+                return (
+                  "<li class=\"admin-item admin-item--inbox\">" +
+                  "<div class=\"admin-inbox-head\"><strong>" +
+                  escapeHtml(rev.destinationSlug) +
+                  " · " +
+                  starsHtml(rev.rating) +
+                  "</strong><span class=\"admin-inbox-time\">" +
+                  new Date(rev.createdAt).toLocaleString() +
+                  "</span></div>" +
+                  "<p class=\"admin-inbox-meta\">" +
+                  escapeHtml(rev.authorName) +
+                  " · ref " +
+                  escapeHtml(rev.bookingRef) +
+                  " · <span class=\"review-status-pill\">" +
+                  escapeHtml(rev.status) +
+                  "</span></p>" +
+                  (rev.title ? "<p><strong>" + escapeHtml(rev.title) + "</strong></p>" : "") +
+                  "<p class=\"admin-inbox-body\">" +
+                  escapeHtml(rev.body || "") +
+                  "</p>" +
+                  '<div class="admin-review-actions">' +
+                  '<button type="button" class="btn btn--outline btn-small" data-review-action="approved" data-review-id="' +
+                  escapeHtml(rev.id) +
+                  '">Approve</button>' +
+                  '<button type="button" class="btn btn--ghost btn-small" data-review-action="rejected" data-review-id="' +
+                  escapeHtml(rev.id) +
+                  '">Reject</button>' +
+                  "</div></li>"
+                );
+              })
+              .join("");
+            reviewsWrap.querySelectorAll("[data-review-action]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                var id = btn.getAttribute("data-review-id");
+                var action = btn.getAttribute("data-review-action");
+                if (!id || !action) return;
+                WanderLuxApi.adminUpdateReviewStatus(id, action)
+                  .then(function () {
+                    loadReviews(page || 1);
+                  })
+                  .catch(function (err) {
+                    showModal("Review update failed", (err && err.message) || "Try again.", true);
+                  });
+              });
+            });
+          }
+          renderPager(reviewsPagerEl, r.pagination, loadReviews);
+        })
+        .catch(function () {
+          if (reviewsWrap) reviewsWrap.innerHTML = "<li>Could not load reviews.</li>";
+          if (reviewsPagerEl) {
+            reviewsPagerEl.hidden = true;
+            reviewsPagerEl.innerHTML = "";
+          }
+        });
+    }
+
     function loadAppointmentInbox(page) {
       WanderLuxApi.adminAppointmentRequests(page || 1, 15)
         .then(function (r) {
@@ -2652,9 +3054,20 @@
 
     loadStats();
     loadUsers();
+    var reviewsRefresh = $("#admin-reviews-refresh");
+    if (reviewsRefresh) reviewsRefresh.onclick = function () {
+      loadReviews(1);
+    };
+    if (reviewStatusFilter) {
+      reviewStatusFilter.addEventListener("change", function () {
+        loadReviews(1);
+      });
+    }
+
     loadDestinations();
     loadContactInbox(1);
     loadAppointmentInbox(1);
+    loadReviews(1);
     loadBookings();
     loadAuditLogsPaged(1);
   }
@@ -2675,6 +3088,7 @@
   }
 
   function startApp() {
+    initThemeToggle();
     initNav();
     updateAuthNav();
     initAppointmentDateMin();
@@ -2700,6 +3114,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    initTheme();
+    if (document.querySelector(".grid-dest-cards, #trip-catalog-grid")) {
+      showCatalogSkeletons();
+    }
     if (window.WanderLuxApi) {
       window.WanderLuxApi
         .bootstrap()
@@ -2713,9 +3131,12 @@
           /* ignore */
         })
         .finally(function () {
+          hideCatalogSkeletons();
+          updateApiStatusBanner();
           startApp();
         });
     } else {
+      hideCatalogSkeletons();
       startApp();
     }
   });

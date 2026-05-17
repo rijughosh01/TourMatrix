@@ -68,12 +68,25 @@
     return cat && typeof cat === "object" ? Object.keys(cat).length : 0;
   }
 
+  var catalogLoadState = {
+    status: "idle",
+    error: null,
+    fromApi: false,
+    slow: false,
+  };
+
+  function getCatalogLoadState() {
+    return catalogLoadState;
+  }
+
   /**
    * Load catalog from API but never replace a good static catalog with an empty {} —
    * that happens when Mongo has no seeded destinations (Book / Details handlers would no-op).
    */
   function bootstrap() {
+    var started = Date.now();
     var staticCat = global.WANDERLUX_TRIP_CATALOG;
+    catalogLoadState = { status: "loading", error: null, fromApi: false, slow: false };
     return fetchJson("GET", "/destinations/catalog", null, false)
       .then(function (data) {
         var incoming = data && data.catalog ? data.catalog : null;
@@ -83,13 +96,64 @@
           global.WANDERLUX_TRIP_CATALOG =
             nStatic > 0 ? Object.assign({}, staticCat, incoming) : incoming;
         }
-        /* nIn === 0: keep trip-data.js (or merge nothing) */
+        catalogLoadState = {
+          status: "ready",
+          error: null,
+          fromApi: nIn > 0,
+          slow: Date.now() - started > 12000,
+        };
         return data;
       })
-      .catch(function () {
-        /* network / API down — keep embedded catalog */
+      .catch(function (err) {
+        catalogLoadState = {
+          status: "error",
+          error: (err && err.message) || "Could not reach the API",
+          fromApi: false,
+          slow: Date.now() - started > 12000,
+        };
         return null;
       });
+  }
+
+  function getDestinationReviews(slug) {
+    return fetchJson("GET", "/reviews/destination/" + encodeURIComponent(slug), null, false).then(function (d) {
+      return { reviews: d.reviews || [], summary: d.summary || { averageRating: 0, count: 0 } };
+    });
+  }
+
+  function getMyReviews() {
+    return fetchJson("GET", "/reviews/my", null, true).then(function (d) {
+      return d.reviews || [];
+    });
+  }
+
+  function getReviewEligibility(bookingRef) {
+    return fetchJson("GET", "/reviews/booking/" + encodeURIComponent(bookingRef), null, true);
+  }
+
+  function submitReview(bookingRef, rating, title, body) {
+    return fetchJson(
+      "POST",
+      "/reviews",
+      { bookingRef: bookingRef, rating: rating, title: title || "", body: body || "" },
+      true
+    ).then(function (d) {
+      return d.review;
+    });
+  }
+
+  function adminReviews(page, pageSize, status) {
+    var q = "?page=" + (page || 1) + "&pageSize=" + (pageSize || 20);
+    if (status) q += "&status=" + encodeURIComponent(status);
+    return fetchJson("GET", "/admin/reviews" + q, null, true);
+  }
+
+  function adminUpdateReviewStatus(reviewId, status) {
+    return fetchJson("PATCH", "/admin/reviews/" + encodeURIComponent(reviewId), { status: status }, true).then(
+      function (d) {
+        return d.review;
+      }
+    );
   }
 
   function meIfToken() {
@@ -326,6 +390,13 @@
   global.WanderLuxApi = {
     API_ROOT: API_ROOT,
     bootstrap: bootstrap,
+    getCatalogLoadState: getCatalogLoadState,
+    getDestinationReviews: getDestinationReviews,
+    getMyReviews: getMyReviews,
+    getReviewEligibility: getReviewEligibility,
+    submitReview: submitReview,
+    adminReviews: adminReviews,
+    adminUpdateReviewStatus: adminUpdateReviewStatus,
     meIfToken: meIfToken,
     getToken: getToken,
     setToken: setToken,

@@ -3487,3 +3487,289 @@ main {
   color: var(--color-text-muted);
   line-height: 1.65;
 }
+
+/* ——— API status banner ——— */
+.api-status-banner {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
+}
+
+.api-status-banner--warn {
+  background: #fff4e6;
+  border-color: #e8c99a;
+  color: #6b4e12;
+}
+
+.api-status-banner--error {
+  background: #fcecef;
+  border-color: #e4b4bb;
+  color: var(--color-error);
+}
+
+.api-status-banner__actions {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-left: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.api-status-banner__btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ——— Catalog skeleton loaders ——— */
+.catalog-skeleton-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.dest-card--skeleton {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  min-height: 360px;
+}
+
+.dest-card--skeleton .sk-media {
+  height: 200px;
+  background: linear-gradient(90deg, var(--color-border) 0%, var(--color-surface-soft) 50%, var(--color-border) 100%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.2s ease-in-out infinite;
+}
+
+.dest-card--skeleton .sk-body {
+  padding: 1.25rem;
+}
+
+.dest-card--skeleton .sk-line {
+  height: 0.85rem;
+  border-radius: 6px;
+  margin-bottom: 0.65rem;
+  background: linear-gradient(90deg, var(--color-border) 0%, var(--color-surface-soft) 50%, var(--color-border) 100%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.2s ease-in-out infinite;
+}
+
+.dest-card--skeleton .sk-line--short {
+  width: 55%;
+}
+
+.dest-card--skeleton .sk-line--title {
+  height: 1.1rem;
+  width: 75%;
+}
+
+.grid-dest-cards.is-loading .dest-card:not(.dest-card--skeleton) {
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+@keyframes sk-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ——— Theme toggle (floating, bottom-right) ——— */
+.theme-toggle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition), transform 0.2s ease, box-shadow var(--transition);
+}
+
+.theme-toggle--fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--color-accent-soft);
+  transform: scale(1.06);
+  box-shadow: 0 12px 32px rgba(58, 82, 74, 0.18);
+}
+
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ——— Wishlist heart ——— */
+.dest-card__bookmark.is-saved {
+  color: #c45c6a;
+}
+
+/* ——— Reviews ——— */
+.trip-reviews-block {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.trip-reviews-summary {
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-bottom: 0.75rem;
+}
+
+.trip-review-item {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+
+.trip-review-item:last-child {
+  border-bottom: none;
+}
+
+.trip-review-item__meta {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.trip-review-item__stars {
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+.review-form-card {
+  margin-top: 1.5rem;
+}
+
+.review-form-card h3 {
+  font-family: var(--font-display);
+  color: var(--color-primary-dark);
+  margin-top: 0;
+}
+
+.review-booking-pick {
+  margin-bottom: 1rem;
+}
+
+.review-status-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-primary-dark);
+}
+
+.review-status-pill--approved {
+  background: #e2f0e6;
+  color: var(--color-success);
+}
+
+.review-status-pill--rejected {
+  background: #fcecef;
+  color: var(--color-error);
+}
+
+.admin-review-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-review-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ——— Dark theme ——— */
+[data-theme="dark"] {
+  --color-bg: #12151a;
+  --color-bg-warm: #181c24;
+  --color-surface: #1c2129;
+  --color-surface-soft: #232a34;
+  --color-surface-elevated: #252d38;
+  --color-primary: #8fb5a8;
+  --color-primary-dark: #b8d4c8;
+  --color-accent: #d4b896;
+  --color-accent-hover: #e5cba8;
+  --color-accent-soft: #3d3528;
+  --color-rose: #c9a09a;
+  --color-text: #ece8e1;
+  --color-text-muted: #a8a39a;
+  --color-border: #343c48;
+  --color-success: #7cb892;
+  --color-error: #e88a96;
+  --shadow-sm: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] body {
+  background-image: radial-gradient(ellipse 120% 80% at 100% -15%, rgba(196, 165, 116, 0.08), transparent 52%),
+    radial-gradient(ellipse 90% 70% at 0% 100%, rgba(90, 125, 114, 0.12), transparent 48%),
+    linear-gradient(180deg, #141820 0%, var(--color-bg) 40%, #10141a 100%);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(28, 33, 41, 0.9);
+  border-bottom-color: rgba(52, 60, 72, 0.9);
+}
+
+[data-theme="dark"] .api-status-banner--warn {
+  background: #2a2418;
+  border-color: #4a3f28;
+  color: #e8c99a;
+}
+
+[data-theme="dark"] .api-status-banner--error {
+  background: #2a1a1e;
+  border-color: #5a3038;
+}
+
+[data-theme="dark"] .dest-card--skeleton {
+  background: var(--color-surface);
+}
+
+@media (max-width: 768px) {
+  .theme-toggle--fab {
+    bottom: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+}

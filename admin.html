@@ -44,6 +44,7 @@
           <li><a href="#admin-editor" class="admin-quick-link">Trip editor</a></li>
           <li><a href="#admin-directory" class="admin-quick-link">Catalog &amp; users</a></li>
           <li><a href="#admin-inbox" class="admin-quick-link">Inbox</a></li>
+          <li><a href="#admin-reviews" class="admin-quick-link">Reviews</a></li>
           <li><a href="#admin-bookings-panel" class="admin-quick-link">Bookings</a></li>
         </ul>
       </div>
@@ -59,6 +60,7 @@
               <a href="#admin-editor" class="admin-side-nav__link">Trip editor</a>
               <a href="#admin-directory" class="admin-side-nav__link">Users &amp; trips</a>
               <a href="#admin-inbox" class="admin-side-nav__link">Inbox</a>
+              <a href="#admin-reviews" class="admin-side-nav__link">Reviews</a>
               <a href="#admin-bookings-panel" class="admin-side-nav__link">Bookings</a>
               <a href="#admin-audit" class="admin-side-nav__link">Audit log</a>
             </nav>
@@ -262,6 +264,29 @@
             <ul id="admin-appointments-list" class="admin-list admin-list--scroll admin-list--inbox"></ul>
             <div class="admin-pager" id="admin-appointments-pager" hidden></div>
           </div>
+        </div>
+        </section>
+
+        <section id="admin-reviews" class="admin-panel">
+        <div class="form-card admin-card admin-card--surface" data-aos="fade-up">
+          <div class="admin-card__head">
+            <div>
+              <h3 class="admin-panel-title admin-panel-title--sm">Trip reviews</h3>
+              <p class="admin-panel-sub">Approve or reject customer reviews before they appear on trip details</p>
+            </div>
+            <div class="admin-review-toolbar">
+              <label class="visually-hidden" for="admin-review-status-filter">Filter status</label>
+              <select id="admin-review-status-filter" class="trip-select">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="">All</option>
+              </select>
+              <button type="button" class="btn btn--ghost btn-small" id="admin-reviews-refresh">Refresh</button>
+            </div>
+          </div>
+          <ul id="admin-reviews-list" class="admin-list admin-list--scroll admin-list--inbox"></ul>
+          <div class="admin-pager" id="admin-reviews-pager" hidden></div>
         </div>
         </section>
 
