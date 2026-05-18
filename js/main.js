@@ -2055,7 +2055,7 @@
           .then(function () {
             showModal(
               "Account created",
-              "Your WanderLux account is ready. Redirecting you home.",
+              "Your TourMatrix account is ready. Redirecting you home.",
               false
             );
             setTimeout(function () {
@@ -2092,7 +2092,7 @@
 
       showModal(
         "Account created",
-        "Your WanderLux account is ready. Please sign in with your email and password.",
+        "Your TourMatrix account is ready. Please sign in with your email and password.",
         false
       );
       setTimeout(function () {
