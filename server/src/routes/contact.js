@@ -23,6 +23,7 @@ router.post(
       await ContactMessage.create({ name, email, topic, message });
       res.status(201).json({ ok: true, message: "Thank you — we will reply shortly." });
     } catch (e) {
+      console.error("[contact]", e);
       res.status(500).json({ error: "Could not save message" });
     }
   }
@@ -53,6 +54,7 @@ router.post(
       });
       res.status(201).json({ ok: true, message: "Appointment request received." });
     } catch (e) {
+      console.error("[appointments]", e);
       res.status(500).json({ error: "Could not save appointment" });
     }
   }

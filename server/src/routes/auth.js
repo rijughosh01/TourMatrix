@@ -38,6 +38,10 @@ router.post(
         user: user.toPublicJSON(),
       });
     } catch (e) {
+      console.error("[auth/register]", e);
+      if (e && e.message === "JWT_SECRET is not set") {
+        return res.status(503).json({ error: "Authentication service is unavailable" });
+      }
       res.status(500).json({ error: "Registration failed" });
     }
   }
@@ -72,6 +76,10 @@ router.post(
         user: user.toPublicJSON(),
       });
     } catch (e) {
+      console.error("[auth/login]", e);
+      if (e && e.message === "JWT_SECRET is not set") {
+        return res.status(503).json({ error: "Authentication service is unavailable" });
+      }
       res.status(500).json({ error: "Login failed" });
     }
   }

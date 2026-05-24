@@ -117,6 +117,21 @@
           </div>
           <p class="trip-results-meta"><span id="trip-results-count">0</span> trips match · <a href="policies.html">Pricing &amp; deposit policy</a></p>
         </div>
+
+        <div id="travel-mood-compact" class="travel-mood travel-mood--compact" aria-labelledby="travel-mood-compact-heading">
+          <div class="travel-mood__head">
+            <h3 class="travel-mood__compact-title" id="travel-mood-compact-heading">Travel mood</h3>
+            <p class="travel-mood__compact-sub">Filter the catalog &amp; ask AI for mood-matched picks</p>
+          </div>
+          <div class="travel-mood__grid" role="group" aria-labelledby="travel-mood-compact-heading">
+            <button type="button" class="travel-mood__btn" data-mood="stress-relief" aria-pressed="false">Stress Relief</button>
+            <button type="button" class="travel-mood__btn" data-mood="romantic" aria-pressed="false">Romantic</button>
+            <button type="button" class="travel-mood__btn" data-mood="adventure" aria-pressed="false">Adventure</button>
+            <button type="button" class="travel-mood__btn" data-mood="party" aria-pressed="false">Party</button>
+            <button type="button" class="travel-mood__btn" data-mood="peaceful" aria-pressed="false">Peaceful</button>
+            <button type="button" class="travel-mood__btn" data-mood="luxury" aria-pressed="false">Luxury</button>
+          </div>
+        </div>
         <div id="live-trip-announcement" class="visually-hidden" role="status" aria-live="polite"></div>
 
         <div id="trip-catalog-grid" class="grid-dest-cards trip-catalog-grid">
@@ -829,6 +844,7 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/trip-data.js"></script>
+  <script src="js/ai-recommendations.js"></script>
   <script src="js/ai-assistant.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/main.js"></script>

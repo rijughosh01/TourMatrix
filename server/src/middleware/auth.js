@@ -33,8 +33,9 @@ function authRequired(req, res, next) {
         req.userId = user._id.toString();
         next();
       })
-      .catch(function () {
-        res.status(401).json({ error: "Unauthorized" });
+      .catch(function (e) {
+        console.error("[auth] user lookup failed", e);
+        res.status(500).json({ error: "Authentication service failed" });
       });
   } catch (e) {
     return res.status(401).json({ error: "Invalid or expired token" });

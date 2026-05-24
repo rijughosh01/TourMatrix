@@ -115,6 +115,23 @@
             <button type="button" class="vibe-option" data-vibe="romantic">Romantic</button>
           </div>
         </div>
+
+        <div id="travel-mood" class="travel-mood" data-aos="fade">
+          <div class="travel-mood__head">
+            <h3 class="section__title" id="travel-mood-heading">What's your travel mood?</h3>
+            <p class="section__subtitle">Tap a mood — our AI reshapes recommendations to match how you want to feel.</p>
+          </div>
+          <div class="travel-mood__grid" role="group" aria-labelledby="travel-mood-heading">
+            <button type="button" class="travel-mood__btn" data-mood="stress-relief" aria-pressed="false">Stress Relief</button>
+            <button type="button" class="travel-mood__btn" data-mood="romantic" aria-pressed="false">Romantic</button>
+            <button type="button" class="travel-mood__btn" data-mood="adventure" aria-pressed="false">Adventure</button>
+            <button type="button" class="travel-mood__btn" data-mood="party" aria-pressed="false">Party</button>
+            <button type="button" class="travel-mood__btn" data-mood="peaceful" aria-pressed="false">Peaceful</button>
+            <button type="button" class="travel-mood__btn" data-mood="luxury" aria-pressed="false">Luxury</button>
+          </div>
+          <p id="travel-mood-hint" class="travel-mood__hint">Choose a mood above to see tailored trip ideas.</p>
+          <div id="travel-mood-results" class="travel-mood__results" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 
@@ -315,6 +332,7 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/trip-data.js"></script>
+  <script src="js/ai-recommendations.js"></script>
   <script src="js/ai-assistant.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/main.js"></script>

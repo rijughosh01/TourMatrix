@@ -46,6 +46,14 @@
       '<button type="button" class="ai-assistant-panel__close" id="ai-assistant-close" aria-label="Close AI chat">&times;</button>' +
       "</header>" +
       '<div id="ai-assistant-messages" class="ai-assistant-messages" role="log" aria-live="polite"></div>' +
+      '<div class="ai-assistant-moods" role="group" aria-label="Travel mood quick picks">' +
+      '<button type="button" class="ai-assistant-mood" data-mood="stress-relief">Stress Relief</button>' +
+      '<button type="button" class="ai-assistant-mood" data-mood="romantic">Romantic</button>' +
+      '<button type="button" class="ai-assistant-mood" data-mood="adventure">Adventure</button>' +
+      '<button type="button" class="ai-assistant-mood" data-mood="party">Party</button>' +
+      '<button type="button" class="ai-assistant-mood" data-mood="peaceful">Peaceful</button>' +
+      '<button type="button" class="ai-assistant-mood" data-mood="luxury">Luxury</button>' +
+      "</div>" +
       '<form id="ai-assistant-form" class="ai-assistant-form">' +
       '<label class="visually-hidden" for="ai-assistant-input">Ask TourMatrix AI</label>' +
       '<textarea id="ai-assistant-input" rows="2" placeholder="e.g. 5 days, beach, under $3000…" maxlength="2000"></textarea>' +
@@ -82,7 +90,10 @@
         appendMessage(
           "assistant",
           configured
-            ? "Hi! I'm TourMatrix AI. Ask for trip ideas (e.g. “5 days, beach, under $3000”), or how booking, payment, and My trips work."
+            ? "Hi! I'm TourMatrix AI. Ask for trip ideas (e.g. “5 days, beach, under $3000”), pick a travel mood below, or ask how booking, payment, and My trips work."
+            : window.WanderLuxApi && window.WanderLuxApi.getCatalogLoadState &&
+              window.WanderLuxApi.getCatalogLoadState().status === "error"
+            ? "AI assistant needs the API running and OPENAI_API_KEY in server/.env. Check the status banner at the top, then refresh."
             : "AI is not configured yet. Add OPENAI_API_KEY to server/.env, restart the API, then refresh this page."
         );
       }
@@ -138,6 +149,100 @@
       if (t) t.remove();
     }
 
+    function moodLabel(moodId) {
+      var map = {
+        "stress-relief": "Stress Relief",
+        romantic: "Romantic",
+        adventure: "Adventure",
+        party: "Party",
+        peaceful: "Peaceful",
+        luxury: "Luxury",
+      };
+      return map[moodId] || moodId;
+    }
+
+    function sendMood(moodId) {
+      if (!moodId) return;
+      setOpen(true);
+      if (!configured) {
+        appendMessage(
+          "assistant",
+          "Server needs OPENAI_API_KEY in server/.env. Restart the API after adding your key."
+        );
+        return;
+      }
+
+      var label = moodLabel(moodId);
+      sendBtn.disabled = true;
+      appendMessage("user", "Travel mood: " + label);
+      history.push({ role: "user", content: "Travel mood: " + label });
+      appendTyping();
+
+      if (!window.WanderLuxApi) {
+        removeTyping();
+        sendBtn.disabled = false;
+        appendMessage("assistant", "API client not loaded. Refresh the page and try again.");
+        return;
+      }
+
+      var request =
+        window.WanderLuxApi && window.WanderLuxApi.aiRecommendByMood
+          ? window.WanderLuxApi.aiRecommendByMood(moodId)
+          : window.WanderLuxApi.aiChat(
+              "Recommend trips for my " + label + " travel mood.",
+              history.slice(0, -1),
+              moodId
+            );
+
+      request
+        .then(function (data) {
+          removeTyping();
+          var reply = data.reply || "Here are some options for your " + label.toLowerCase() + " mood.";
+          appendMessage("assistant", reply, data.suggestions || []);
+          history.push({ role: "assistant", content: reply });
+          if (history.length > 16) history = history.slice(-16);
+        })
+        .catch(function (err) {
+          removeTyping();
+          var apiMsg =
+            window.WanderLuxApi && window.WanderLuxApi.formatApiError
+              ? window.WanderLuxApi.formatApiError(err)
+              : (err && err.message) || "";
+          if (window.TravelMood && window.TravelMood.fallback) {
+            var fallback = window.TravelMood.fallback(moodId);
+            if (fallback.suggestions && fallback.suggestions.length) {
+              var reply = (apiMsg ? apiMsg + " " : "") + fallback.reply;
+              appendMessage("assistant", reply, fallback.suggestions || []);
+              history.push({ role: "assistant", content: reply });
+            } else {
+              appendMessage(
+                "assistant",
+                apiMsg || "Sorry, I could not respond. Check the API is running."
+              );
+            }
+          } else {
+            appendMessage(
+              "assistant",
+              apiMsg || "Sorry, I could not respond. Check the API is running."
+            );
+          }
+        })
+        .finally(function () {
+          sendBtn.disabled = false;
+        });
+    }
+
+    window.AiAssistant = {
+      open: function () {
+        setOpen(true);
+      },
+      sendMood: sendMood,
+    };
+
+    if (window.TravelMood) {
+      window.TravelMood.openAiWithMood = sendMood;
+    }
+
     fab.addEventListener("click", function () {
       setOpen(panel.hidden);
     });
@@ -162,7 +267,7 @@
       history.push({ role: "user", content: text });
       appendTyping();
 
-      WanderLuxApi.aiChat(text, history.slice(0, -1))
+      window.WanderLuxApi.aiChat(text, history.slice(0, -1))
         .then(function (data) {
           removeTyping();
           var reply = data.reply || "Here are some options for you.";
@@ -172,22 +277,26 @@
         })
         .catch(function (err) {
           removeTyping();
-          appendMessage(
-            "assistant",
-            (err && err.message) || "Sorry, I could not respond. Check the API is running."
-          );
+          var msg =
+            window.WanderLuxApi && window.WanderLuxApi.formatApiError
+              ? window.WanderLuxApi.formatApiError(err, "Sorry, I could not respond. Check the API is running.")
+              : (err && err.message) || "Sorry, I could not respond. Check the API is running.";
+          appendMessage("assistant", msg);
         })
         .finally(function () {
           sendBtn.disabled = false;
         });
     });
 
-    WanderLuxApi.aiStatus()
+    window.WanderLuxApi.aiStatus()
       .then(function (st) {
         configured = !!(st && st.configured);
       })
-      .catch(function () {
+      .catch(function (err) {
         configured = false;
+        if (err && err.network && welcomeShown === false) {
+          /* API unreachable — welcome message will note connectivity when panel opens */
+        }
       });
 
     input.addEventListener("keydown", function (e) {
@@ -195,6 +304,12 @@
         e.preventDefault();
         form.requestSubmit();
       }
+    });
+
+    root.querySelectorAll(".ai-assistant-mood").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        sendMood(btn.getAttribute("data-mood"));
+      });
     });
   }
 

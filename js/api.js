@@ -37,6 +37,28 @@
     return cachedUser;
   }
 
+  function formatApiError(err, fallback) {
+    if (!err) return fallback || "Something went wrong. Please try again.";
+    if (err.network) return err.message;
+    if (err.status === 429) return "Too many requests. Please wait a moment and try again.";
+    if (err.status === 503) return err.message || "Service temporarily unavailable.";
+    return err.message || fallback || "Request failed";
+  }
+
+  function parseResponseBody(res) {
+    return res.text().then(function (text) {
+      if (!text) return {};
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        var parseErr = new Error("Invalid server response. Check the API is running.");
+        parseErr.status = res.status;
+        parseErr.parseError = true;
+        throw parseErr;
+      }
+    });
+  }
+
   function fetchJson(method, path, body, sendAuth) {
     var headers = { Accept: "application/json" };
     if (body !== undefined && body !== null) {
@@ -50,18 +72,25 @@
     if (body !== undefined && body !== null) {
       opts.body = JSON.stringify(body);
     }
-    return fetch(API + path, opts).then(function (res) {
-      return res.json().then(function (data) {
-        if (!res.ok) {
-          var msg = (data && data.error) || res.statusText || "Request failed";
-          var err = new Error(msg);
-          err.status = res.status;
-          err.body = data;
-          throw err;
-        }
-        return data;
+    return fetch(API + path, opts)
+      .then(function (res) {
+        return parseResponseBody(res).then(function (data) {
+          if (!res.ok) {
+            var msg = (data && data.error) || res.statusText || "Request failed";
+            var err = new Error(msg);
+            err.status = res.status;
+            err.body = data;
+            throw err;
+          }
+          return data;
+        });
+      })
+      .catch(function (err) {
+        if (err && (err.status !== undefined || err.parseError)) throw err;
+        var networkErr = new Error("Could not reach the API. Check your connection or try again.");
+        networkErr.network = true;
+        throw networkErr;
       });
-    });
   }
 
   function catalogKeyCount(cat) {
@@ -174,7 +203,10 @@
         }
         return d.user;
       })
-      .catch(function () {
+      .catch(function (err) {
+        if (err && err.status && err.status !== 401 && err.status !== 403) {
+          return null;
+        }
         clearToken();
         try {
           localStorage.removeItem("wanderlux_session");
@@ -367,8 +399,14 @@
     return fetchJson("GET", "/ai/status", null, false);
   }
 
-  function aiChat(message, history) {
-    return fetchJson("POST", "/ai/chat", { message: message, history: history || [] }, false);
+  function aiChat(message, history, mood) {
+    var body = { message: message, history: history || [] };
+    if (mood) body.mood = mood;
+    return fetchJson("POST", "/ai/chat", body, false);
+  }
+
+  function aiRecommendByMood(mood) {
+    return fetchJson("POST", "/ai/mood", { mood: mood }, false);
   }
 
   function adminUploadImage(file) {
@@ -382,17 +420,24 @@
       method: "POST",
       headers: { Authorization: "Bearer " + token },
       body: fd,
-    }).then(function (res) {
-      return res.json().then(function (data) {
-        if (!res.ok) {
-          var err = new Error((data && data.error) || "Upload failed");
-          err.status = res.status;
-          err.body = data;
-          throw err;
-        }
-        return data;
+    })
+      .then(function (res) {
+        return parseResponseBody(res).then(function (data) {
+          if (!res.ok) {
+            var err = new Error((data && data.error) || "Upload failed");
+            err.status = res.status;
+            err.body = data;
+            throw err;
+          }
+          return data;
+        });
+      })
+      .catch(function (err) {
+        if (err && (err.status !== undefined || err.parseError)) throw err;
+        var networkErr = new Error("Could not reach the API. Check your connection or try again.");
+        networkErr.network = true;
+        throw networkErr;
       });
-    });
   }
 
   global.WanderLuxApi = {
@@ -410,6 +455,7 @@
     setToken: setToken,
     clearToken: clearToken,
     getCurrentUser: getCurrentUser,
+    formatApiError: formatApiError,
     register: register,
     login: login,
     logout: logout,
@@ -440,5 +486,6 @@
     adminUploadImage: adminUploadImage,
     aiStatus: aiStatus,
     aiChat: aiChat,
+    aiRecommendByMood: aiRecommendByMood,
   };
 })(typeof window !== "undefined" ? window : globalThis);

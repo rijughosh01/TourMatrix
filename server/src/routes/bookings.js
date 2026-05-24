@@ -132,6 +132,7 @@ router.post("/start", optionalAuth, async function (req, res) {
       createdAt: booking.createdAt,
     });
   } catch (e) {
+    console.error("[bookings/start]", e);
     res.status(500).json({ error: "Could not start booking" });
   }
 });
@@ -167,6 +168,7 @@ router.get("/ref/:ref", async function (req, res) {
         : null,
     });
   } catch (e) {
+    console.error("[bookings/ref]", e);
     res.status(500).json({ error: "Failed to load booking" });
   }
 });
@@ -216,6 +218,7 @@ router.patch("/ref/:ref/checkout", optionalAuth, async function (req, res) {
       deposit: booking.deposit,
     });
   } catch (e) {
+    console.error("[bookings/checkout]", e);
     res.status(500).json({ error: "Failed to update checkout" });
   }
 });
@@ -283,6 +286,7 @@ router.post("/ref/:ref/pay", optionalAuth, async function (req, res) {
       razorpayPaymentId: booking.razorpayPaymentId,
     });
   } catch (e) {
+    console.error("[bookings/payment-verify]", e);
     res.status(500).json({ error: "Payment recording failed" });
   }
 });
@@ -336,6 +340,7 @@ router.post("/ref/:ref/razorpay-order", optionalAuth, async function (req, res) 
       deposit: booking.deposit,
     });
   } catch (e) {
+    console.error("[bookings/razorpay-order]", e);
     res.status(500).json({ error: "Could not create Razorpay order" });
   }
 });
@@ -369,6 +374,7 @@ router.get("/my", authRequired, async function (req, res) {
     });
     res.json({ bookings: items });
   } catch (e) {
+    console.error("[bookings/list]", e);
     res.status(500).json({ error: "Failed to load bookings" });
   }
 });

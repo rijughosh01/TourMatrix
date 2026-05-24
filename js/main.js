@@ -429,6 +429,21 @@
     );
   }
 
+  function formatClientApiError(err, fallback) {
+    if (window.WanderLuxApi && window.WanderLuxApi.formatApiError) {
+      return window.WanderLuxApi.formatApiError(err, fallback);
+    }
+    return (err && err.message) || fallback || "Something went wrong. Please try again.";
+  }
+
+  function handleStartBookingError(err) {
+    var msg = formatClientApiError(err, "Could not start booking on the server. Check the API is running and try again.");
+    if (err && err.status === 404) {
+      msg += " The destination may be missing from the database — run npm run seed in the server folder.";
+    }
+    showModal("Booking unavailable", msg, true);
+  }
+
   function getPendingBooking() {
     try {
       var raw = localStorage.getItem(STORAGE_PENDING);
@@ -509,9 +524,8 @@
               );
               window.location.href = "checkout.html";
             })
-            .catch(function () {
-              setPendingBooking(id);
-              window.location.href = "checkout.html";
+            .catch(function (err) {
+              handleStartBookingError(err);
             });
         } else {
           setPendingBooking(id);
@@ -1163,7 +1177,15 @@
           window.location.href = "payment.html";
         };
         if (ref && window.WanderLuxApi) {
-          WanderLuxApi.patchCheckout(ref, draft).then(done).catch(done);
+          WanderLuxApi.patchCheckout(ref, draft)
+            .then(done)
+            .catch(function (err) {
+              showModal(
+                "Could not save checkout",
+                formatClientApiError(err, "Your details could not be saved. Try again before paying."),
+                true
+              );
+            });
         } else {
           done();
         }
@@ -1208,9 +1230,11 @@
             );
             runWizard(getPendingBooking());
           })
-          .catch(function () {
-            setPendingBooking(destParam);
-            runWizard(getPendingBooking());
+          .catch(function (err) {
+            handleStartBookingError(err);
+            setTimeout(function () {
+              window.location.href = "booking.html";
+            }, 2500);
           });
         return;
       }
@@ -1559,8 +1583,12 @@
               if (ref) ref.textContent = synced.ref;
             }
           })
-          .catch(function () {
-            /* payment submit will surface a clearer error */
+          .catch(function (err) {
+            showModal(
+              "Booking sync failed",
+              formatClientApiError(err, "Could not sync booking with the server. Payment may fail until this is resolved."),
+              true
+            );
           });
       }
 
@@ -2151,12 +2179,9 @@
               window.location.href = "index.html";
             }, 1200);
           })
-          .catch(function () {
-            showModal(
-              "Login failed",
-              "Email or password is incorrect. Create an account if you are new.",
-              true
-            );
+          .catch(function (err) {
+            var msg = formatClientApiError(err, "Email or password is incorrect. Create an account if you are new.");
+            showModal("Login failed", msg, true);
           });
         return;
       }
@@ -3088,6 +3113,7 @@
   }
 
   function startApp() {
+    window.TourMatrixUi = { showModal: showModal, formatApiError: formatClientApiError };
     initThemeToggle();
     initNav();
     updateAuthNav();

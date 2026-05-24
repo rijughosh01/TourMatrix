@@ -3393,6 +3393,162 @@ main {
   transform: translateY(-2px);
 }
 
+/* ——— Travel Mood (AI recommendations) ——— */
+.travel-mood {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #e8eef5 0%, var(--color-surface-soft) 50%, #ebe8f0 100%);
+  border: 1px solid var(--color-border);
+}
+
+.travel-mood__head {
+  margin-bottom: 0.5rem;
+}
+
+.travel-mood__head .section__title {
+  margin-top: 0;
+  font-size: 1.35rem;
+}
+
+.travel-mood__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.travel-mood__btn {
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.travel-mood__btn:hover,
+.travel-mood__btn:focus-visible {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.travel-mood__btn.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.travel-mood__hint {
+  margin: 0.85rem 0 0;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+.travel-mood__results {
+  margin-top: 1.25rem;
+  min-height: 0;
+}
+
+.travel-mood__reply {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.travel-mood__fallback-note {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.travel-mood__error {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  background: #fdecea;
+  border: 1px solid #f5c2c0;
+  color: #8a1f17;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .travel-mood__error {
+  background: rgba(180, 50, 45, 0.15);
+  border-color: rgba(245, 194, 192, 0.35);
+  color: #ffb4ae;
+}
+
+.travel-mood__cards {
+  margin-top: 0.5rem;
+}
+
+.travel-mood__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+  color: var(--color-text-muted);
+}
+
+.travel-mood__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: travel-mood-spin 0.8s linear infinite;
+}
+
+@keyframes travel-mood-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .travel-mood__spinner {
+    animation: none;
+    border-top-color: var(--color-primary);
+  }
+}
+
+.travel-mood--compact {
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+}
+
+.travel-mood--compact .travel-mood__compact-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.travel-mood--compact .travel-mood__compact-sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.travel-mood--compact .travel-mood__grid {
+  margin-top: 0.75rem;
+}
+
+.travel-mood--compact .travel-mood__btn {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+[data-theme="dark"] .travel-mood {
+  background: linear-gradient(135deg, #1e2428 0%, var(--color-surface-soft) 55%, #1a1e24 100%);
+}
+
 .recent-ticker {
   text-align: center;
   padding: 0.85rem;
@@ -3947,6 +4103,33 @@ body:has(#api-status-banner:not([hidden])) .ai-assistant-panel {
 .ai-trip-card span {
   font-size: 0.8rem;
   color: var(--color-text-muted);
+}
+
+.ai-assistant-moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.65rem 0.75rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+}
+
+.ai-assistant-mood {
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ai-assistant-mood:hover,
+.ai-assistant-mood:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-accent-soft);
 }
 
 .ai-assistant-form {
