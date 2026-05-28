@@ -820,6 +820,14 @@
         "<h4>FAQ</h4><dl class=\"trip-detail-faq\">" +
         faq +
         "</dl>" +
+        "<div class=\"share-section\">" +
+        "<div class=\"share-menu-label\">Share this trip</div>" +
+        (window.SocialShare ? window.SocialShare.createShareMenu(
+          SocialShare.generateTripUrl(c.slug, c.title),
+          "Check out " + c.title + " on TourMatrix Travel Agency",
+          ["facebook", "twitter", "whatsapp", "linkedin", "email"]
+        ) : "") +
+        "</div>" +
         "<div id=\"trip-detail-reviews\" class=\"trip-reviews-block\"><p class=\"trip-reviews-summary\">Loading reviews…</p></div>";
     }
 
@@ -1262,6 +1270,12 @@
         encodeURIComponent("WanderLux — " + rec.title) +
         "&details=" +
         encodeURIComponent("Ref " + rec.ref + ". Deposit paid.");
+      var shareUrl = window.location.origin + "/booking.html?ref=" + encodeURIComponent(rec.destinationSlug || "");
+      var shareMenu = window.SocialShare ? window.SocialShare.createShareMenu(
+        shareUrl,
+        "I just booked " + rec.title + " with TourMatrix Travel Agency!",
+        ["facebook", "twitter", "whatsapp", "linkedin", "email"]
+      ) : "";
       detailEl.innerHTML =
         "<p>Confirmation sent to <strong>" +
         escapeHtml(rec.receiptEmail || "") +
@@ -1269,6 +1283,7 @@
         "<p><a class=\"btn btn--secondary\" href=\"" +
         calLink +
         "\" target=\"_blank\" rel=\"noopener\">Add reminder to Google Calendar</a></p>" +
+        (shareMenu ? "<div style=\"margin: 1.5rem 0;\"><div style=\"text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.75rem;\">Share your trip</div>" + shareMenu + "</div>" : "") +
         "<p><a href=\"policies.html#itinerary\" class=\"btn btn--outline\">Document delivery policy</a></p>";
     }
 
@@ -1399,6 +1414,8 @@
           var pillClass = "review-status-pill";
           if (r.status === "approved") pillClass += " review-status-pill--approved";
           if (r.status === "rejected") pillClass += " review-status-pill--rejected";
+          var shareBtn = r.status === "approved" && window.SocialShare ?
+            ' <button class="share-review-btn" data-review-id="' + escapeHtml(r._id) + '" data-destination="' + escapeHtml(r.destinationSlug) + '" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--color-accent); font-weight: 600; font-size: 0.85rem;">Share</button>' : '';
           return (
             "<li><span class=\"" +
             pillClass +
@@ -1410,12 +1427,36 @@
             escapeHtml(r.title || r.destinationSlug) +
             "</strong> — " +
             escapeHtml(r.bookingRef) +
+            shareBtn +
             "<br>" +
             escapeHtml(r.body || "") +
             "</li>"
           );
         })
         .join("");
+
+      // Add event listeners to share buttons
+      $$(".share-review-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var reviewId = btn.getAttribute("data-review-id");
+          var destination = btn.getAttribute("data-destination");
+          if (window.SocialShare) {
+            var shareUrl = window.location.origin + "/booking.html?trip=" + encodeURIComponent(destination) + "&review=" + encodeURIComponent(reviewId);
+            var menu = window.SocialShare.createShareMenu(
+              shareUrl,
+              "Check out my review on TourMatrix Travel Agency",
+              ["facebook", "twitter", "whatsapp", "linkedin", "email"]
+            );
+            var modal = document.createElement("div");
+            modal.className = "share-modal";
+            modal.innerHTML = "<div class=\"share-modal__header\"><h3>Share your review</h3><p>Let your friends see your experience</p></div>" + menu;
+            btn.parentElement.insertAdjacentElement("afterend", modal);
+            setTimeout(function () {
+              modal.remove();
+            }, 5000);
+          }
+        });
+      });
     }
 
     function initReviewForm() {

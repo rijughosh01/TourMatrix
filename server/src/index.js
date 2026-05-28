@@ -15,6 +15,7 @@ const contactRoutes = require("./routes/contact");
 const adminRoutes = require("./routes/admin");
 const reviewsRoutes = require("./routes/reviews");
 const aiRoutes = require("./routes/ai");
+const sharesRoutes = require("./routes/shares");
 
 const PORT = parseInt(process.env.PORT || "5001", 10);
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/wanderlux";
@@ -104,6 +105,7 @@ async function main() {
   app.use("/api/destinations", destinationsRoutes);
   app.use("/api/bookings", bookingsRoutes);
   app.use("/api/reviews", reviewsRoutes);
+  app.use("/api/shares", sharesRoutes);
   app.use("/api/ai", aiLimiter, aiRoutes);
   app.use("/api", contactRoutes);
   app.use("/api/admin", adminRoutes);
